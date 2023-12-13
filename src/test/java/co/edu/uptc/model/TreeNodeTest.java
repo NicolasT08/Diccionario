@@ -1,0 +1,10 @@
+package co.edu.uptc.model;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class TreeNodeTest {
+    @Test
+    void test(){
+        
+    }
+}
