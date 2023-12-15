@@ -34,4 +34,6 @@ public class Word {
     public void setTranslation(String translation) {
         this.translation = translation;
     }
+
+
 }

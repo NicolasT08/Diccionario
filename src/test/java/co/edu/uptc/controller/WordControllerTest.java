@@ -5,6 +5,8 @@ import co.edu.uptc.model.Word;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WordControllerTest {
@@ -73,6 +75,7 @@ public class WordControllerTest {
         Word[] words ={
                 new Word("uwu", "emoticono tierno", "uwu"),
                 new Word("Árbol", "planta", "tree"),
+                //new Word("arbol", "planta", "tree"),
                 new Word("agua", "líquido", "wa ter"),
                 new Word("Madera", "material de árboles", "wood"),
                 new Word("Salir", "Ir a fuera", "Go Out")
@@ -106,6 +109,36 @@ public class WordControllerTest {
         for ( Word w : invalidWords ){
             assertNotEquals("La palabra " + w.getId() + " ha sido añadida satisfactoriamente", this.controller.addWord(w.getId(), w.getMeaning(), w.getTranslation()));
         }
+    }
+
+    @Test
+    void ListByCharTest(){
+
+        assertNull( this.controller.listByFirstChar('b'));
+        assertNull( this.controller.listByFirstChar('2'));
+        assertNull( this.controller.listByFirstChar('%'));
+
+        Word[] newWords = {
+                new Word("árbol", "planta grande", "tree"),
+                new Word("alba", "Amanecer", "sunrise"),
+                new Word("anochecer", "Cuando el sol cae", "sunset"),
+                new Word("alegría", "Emoción", "happy"),
+                new Word("alto", "Sustantivo", "high"),
+                new Word("astro", "cuerpo celeste", "star"),
+                new Word("aún", "cuerpo celeste", "star"),
+        };
+
+        Arrays.sort(newWords, ((o1, o2) -> o1.getId().compareTo(o2.getId())));
+        for( Word w: newWords ){
+            this.controller.addWord(w.getId(),w.getMeaning(),w.getTranslation());
+        }
+        String[][] expectedeResult = this.controller.listByFirstChar('a');
+        for ( int i = 0; i < expectedeResult.length; i++ ){
+            assertEquals(newWords[i].getId(), expectedeResult[i][0]);
+            assertEquals(newWords[i].getMeaning(), expectedeResult[i][1]);
+            assertEquals(newWords[i].getTranslation(), expectedeResult[i][2]);
+        }
+
     }
 }
 

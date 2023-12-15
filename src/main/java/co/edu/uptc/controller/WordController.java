@@ -3,6 +3,8 @@ package co.edu.uptc.controller;
 import co.edu.uptc.exceptions.ERROR_REASON;
 import co.edu.uptc.exceptions.InvalidWord;
 import co.edu.uptc.model.BinaryTree;
+import co.edu.uptc.model.LinkedList;
+import co.edu.uptc.model.ListNode;
 import co.edu.uptc.model.Word;
 
 public class WordController {
@@ -43,8 +45,9 @@ public class WordController {
             translation = translation.replaceAll("\\s+", " ");
 
             int root = this.findIndex(word);
-            Word newWord = new Word( word, meaning,translation);
+            Word newWord = new Word( word.toLowerCase(), meaning,translation);
             if ( this.dictionary[root].findNode(newWord) != null) throw new InvalidWord( word, ERROR_REASON.EXIST);
+
             this.dictionary[root].addNode( newWord );
             returnMessage = "La palabra " + word + " ha sido añadida satisfactoriamente";
 
@@ -81,6 +84,18 @@ public class WordController {
     }
 
     public String[][] listByFirstChar( char firstCharacter ){
+        try {
+            int root = this.findIndex(String.valueOf(firstCharacter));
+            if ( this.dictionary[root].isEmpty() ) return null;
+            LinkedList<Word> treeWords = this.dictionary[root].listInsort();
+            String[][] result = new String[treeWords.size()][3];
+            for ( int i = 0; i < treeWords.size(); i++ ){
+                result[i][0] = treeWords.get(i).getId();
+                result[i][1] = treeWords.get(i).getMeaning();
+                result[i][2] = treeWords.get(i).getTranslation();
+            }
+            return result;
+        }catch ( InvalidWord e){}
         return null;
     }
 
@@ -88,8 +103,26 @@ public class WordController {
         return null;
     }
 
-    public String updateWord(String newValue, ATT_TYPE att){
+    public String updateWord(String word, String newValue, ATT_TYPE att){
+        try {
+            switch ( att ){
+                case WORD -> updateID( word, newValue);
+                case MEANING -> updateMeaning( word,newValue);
+                case TRANSLATE -> updateTranslation( word, newValue);
+            }
+        }catch ( InvalidWord e){
+
+        }
         return "";
+    }
+
+    private void updateID( String word, String newValue ){
+    }
+    private void updateMeaning(String word, String newValue ){
+
+    }
+    private void updateTranslation( String word, String newValue ){
+
     }
     public String deleteWord( String word ){
         return "";
