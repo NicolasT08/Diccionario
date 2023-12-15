@@ -5,6 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TreeNodeTest {
     @Test
     void test(){
-        
+
     }
 }
