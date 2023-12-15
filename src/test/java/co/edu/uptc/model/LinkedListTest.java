@@ -57,7 +57,7 @@ public class LinkedListTest {
 
     @Test
     void getTest(){
-        for ( int i = 0; i < 9; i++ ){
+        for ( int i = 0; i < this.listInts.size(); i++ ){
             assertEquals(i, this.listInts.get(i));
         }
 
@@ -67,6 +67,60 @@ public class LinkedListTest {
         }
 
         assertEquals(4, this.listInts.get(this.listInts.size()/2));
+
+        assertDoesNotThrow( () -> this.listInts.get(4));
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> this.listInts.get(10)
+        );
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                ()-> this.words.get(-2)
+        );
+
+    }
+
+    @Test
+    void addTest(){
+        LinkedList<Integer> list = new LinkedList<>();
+        assertEquals(0, list.size());
+        list.add(3);
+        assertEquals(1, list.size());
+        list.add(30);
+        assertEquals(2, list.size());
+
+        assertDoesNotThrow( ()-> list.add(2000));
+
+        assertThrows(
+                NullPointerException.class,
+                () -> list.add(null)
+        );
+    }
+
+    @Test
+    void getIndexOfTest(){
+        for ( int i = 0; i < this.listInts.size(); i++ ){
+            assertEquals(i, this.listInts.getIndexOf(i));
+        }
+
+        String[] expectedWords = {"Hola", "Hu Tao", "Ganyu","Yae Miko"," ","Nada", "Hada" };
+        for ( int i = 0; i < expectedWords.length; i++ ){
+            assertEquals(i  , this.words.getIndexOf(expectedWords[i]));
+        }
+
+        assertEquals(-1, this.words.getIndexOf("Amber"));
+        assertEquals(-1, this.words.getIndexOf("Kokomi"));
+
+        assertThrows(
+                NullPointerException.class,
+                () -> this.words.getIndexOf(null)
+        );
+
+        assertThrows(
+                NullPointerException.class,
+                () -> this.listInts.getIndexOf(null)
+        );
+
     }
 
 

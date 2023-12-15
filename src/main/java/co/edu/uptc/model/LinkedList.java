@@ -11,6 +11,7 @@ public class LinkedList <T>{
         return head == null;
     }
     public void add(T info){
+        if ( info == null ) throw new NullPointerException();
         if( this.isEmpty() ){
             this.head = new ListNode<>( info );
             return;
@@ -36,6 +37,19 @@ public class LinkedList <T>{
         }
         return null;
     }
+
+    public int getIndexOf( T info ){
+        if ( info == null ) throw new NullPointerException();
+        int index = 0;
+        ListNode<T> aux = head;
+        while ( aux != null ){
+            if ( aux.getInfo() == info ) return index;
+            aux = aux.getNext();
+            index++;
+        }
+        return -1;
+    }
+
 
     public int size(){
         int size = 0;
