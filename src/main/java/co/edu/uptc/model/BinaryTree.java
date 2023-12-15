@@ -1,17 +1,14 @@
 package co.edu.uptc.model;
 
 import co.edu.uptc.model.TreeNode;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class BinaryTree <T>{
     private Comparator<T> comparator;
 
-    TreeNode<T> root;
+    private TreeNode<T> root;
 
-    List<T> list;
+    private LinkedList<T> list;
 
     public BinaryTree(Comparator<T> comparator) {
         this.comparator = comparator;
@@ -41,45 +38,18 @@ public class BinaryTree <T>{
         }
     }
 
-    public List<T> listPresort(){
-        list = new ArrayList<>();
-        presort(root);
 
-        return list;
-    }
-    public List<T> listInsort(){
-        list = new ArrayList<>();
+    public LinkedList<T> listInsort(){
+        list = new LinkedList<>();
         insort(root);
-
         return list;
-    }
-    public List<T> listPosort(){
-        list = new ArrayList<>();
-        posort(root);
-
-        return list;
-    }
-
-    private void presort( TreeNode<T> root){
-        if ( root != null ){
-            list.add( root.getInfo() );
-            presort(root.getLeft());
-            presort(root.getRight());
-        }
     }
     private void insort( TreeNode<T> root){
         if ( root != null ){
             insort(root.getLeft());
             list.add( root.getInfo() );
+
             insort(root.getRight());
-        }
-    }
-    private void posort( TreeNode<T> root){
-        //pendiente
-        if ( root != null ){
-            posort(root.getLeft());
-            posort(root.getRight());
-            list.add( root.getInfo() );
         }
     }
     public TreeNode<T> findNode( T info ){
@@ -90,9 +60,6 @@ public class BinaryTree <T>{
         }
 
         return aux;
-    }
-    public int levelNode(TreeNode<T> node){
-        return node == root ? 0 : levelNode( findFather(node) ) + 1;
     }
 
     public TreeNode<T> findFather(TreeNode<T> node) {
@@ -106,28 +73,6 @@ public class BinaryTree <T>{
         return null;
     }
 
-    public List<T> listAmplitudeDown(){
-        List<T> out = new ArrayList<>();
-
-        ArrayDeque<TreeNode> tail = new ArrayDeque<>();
-        tail.add(root);
-
-        while (!tail.isEmpty()){
-            TreeNode<T> aux = tail.poll();
-
-            if ( aux.getLeft() != null ){
-                tail.add( aux.getLeft() );
-            }
-            if( aux.getRight() != null ){
-                tail.add( aux.getRight() );
-            }
-
-            out.add( aux.getInfo() );
-        }
-
-        return out;
-    }
-
     public byte gradeNode( TreeNode<T> node ){
         int grade = 0;
         if ( node.getLeft() != null ) grade++;
@@ -135,8 +80,9 @@ public class BinaryTree <T>{
         return (byte)grade;
     }
 
-    public boolean isLeaf( TreeNode<T> node){
-        return false;
+
+    public int levelNode(TreeNode<T> node){
+        return node == root ? 0 : levelNode( findFather(node) ) + 1;
     }
 
     public T deleteNode( TreeNode<T> node ){
@@ -158,12 +104,12 @@ public class BinaryTree <T>{
         }else {
             TreeNode<T> father = findFather( node );
 
-            List<T> ordererlist = this.listInsort();
+            LinkedList<T> ordererlist = this.listInsort();
 
-            T replaceinfo = ordererlist.get(ordererlist.indexOf(node.getInfo()) + 1);
+            T replaceinfo = ordererlist.get(ordererlist.getIndexOf(node.getInfo()) + 1);
             
             TreeNode<T> replace = this.findNode(replaceinfo);
-            TreeNode<T> replaceFather = findFather(replace);
+            TreeNode<T> replaceFather = this.findFather(replace);
 
             if (replaceFather != node) {
                 replaceFather.setLeft(replace.getRight());
