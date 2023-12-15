@@ -101,11 +101,5 @@ class BinaryTreeTest {
         assertEquals(50, bts.findFather( bts.findNode(18)).getInfo());
         assertEquals(1,bts.gradeNode( bts.findNode( 34) ) );
 
-
-        setupOne();
-//        Dish dish = dishes.deleteNode( dishes.findNode( new Dish( "345",null,0.0,0,false ) ) );
-//
-//        assertEquals("345", dish.getId());
-//        assertEquals("Carne en Bisteck", dish.getName());
     }
 }
