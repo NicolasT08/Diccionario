@@ -1,15 +1,16 @@
 package co.edu.uptc.controller;
 
 import co.edu.uptc.model.BinaryTree;
+import co.edu.uptc.model.Word;
 
 public class WordController {
-    private BinaryTree<String>[] dictionary;
+    private BinaryTree<Word>[] dictionary;
     static final int LETTER_NUM = 27;
 
     public WordController() {
         this.dictionary = new BinaryTree[LETTER_NUM];
         for( int i = 0; i < LETTER_NUM; i++ ){
-            this.dictionary[i] = new BinaryTree<>();
+            this.dictionary[i] = new BinaryTree<>(((o1, o2) -> o1.getId().compareTo(o2.getId())));
         }
     }
 
@@ -48,8 +49,4 @@ public class WordController {
     public String updateWord(String newValue, ATT_TYPE att){
         return "";
     }
-
-
-
-
 }
