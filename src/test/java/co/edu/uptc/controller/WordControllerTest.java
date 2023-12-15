@@ -1,5 +1,6 @@
 package co.edu.uptc.controller;
 
+import co.edu.uptc.model.Word;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -60,5 +61,72 @@ public class WordControllerTest {
         );
         assertDoesNotThrow(() -> this.controller.findIndex("Hola"));
         assertDoesNotThrow(() -> this.controller.findIndex("euler"));
+    }
+
+    @Test
+    void findWord(){
+        setup();
+
+        assertNull(controller.findWord("Paranguaricutirimicuaro"));
+
+        controller.addWord("hu tao","La asesina de bosses","the boss killer");
+
+        String[] huTao = {"hu tao","la asesina de bosses","the boss killer"};
+
+        assertArrayEquals(huTao, controller.findWord("hu tao"));
+
+        assertArrayEquals(huTao, controller.findWord("Hu tao"));
+
+        controller.addWord("habitar","Residir o vivir en un lugar","to inhabit");
+
+        String[] inhabit = {"habitar","Residir o vivir en un lugar","to inhabit"};
+
+        assertArrayEquals(inhabit, controller.findWord("habitar"));
+
+        assertArrayEquals(inhabit, controller.findWord("habitar"));
+
+        assertNull(controller.findWord("alfredo"));
+
+    }
+
+    @Test
+    void showAllWords(){
+        setup();
+
+        controller.addWord("habitar","Residir o vivir en un lugar","to inhabit");
+
+        String[] inhabit = {"habitar","Residir o vivir en un lugar","to inhabit"};
+
+        assertArrayEquals(inhabit, controller.showAllWords()[0]);
+
+        controller.addWord("hu tao","la asesina de bosses","the boss killer");
+
+        String[] huTao = {"hu tao","la asesina de bosses","the boss killer"};
+
+        assertArrayEquals(huTao, controller.showAllWords()[1]);
+
+        controller.addWord("ígneo","Relativo al fuego o que tiene origen en el fuego","igneous");
+
+        String[] igneous = {"ígneo","Relativo al fuego o que tiene origen en el fuego","igneous"};
+
+        assertArrayEquals(igneous, controller.showAllWords()[2]);
+    }
+
+    @Test
+    void deleteWord(){
+        setup();
+
+        assertEquals(1 , controller.showAllWords().length);
+
+        controller.addWord("Hu tao","la asesina de bosses","the boss killer");
+
+        String[] huTao = {"hu tao","la asesina de bosses","the boss killer"};
+
+        assertArrayEquals(huTao, controller.deleteWord("Hu tao"));
+
+        assertNull(controller.deleteWord("goku"));
+
+        assertEquals(0 , controller.showAllWords().length);
+
     }
 }

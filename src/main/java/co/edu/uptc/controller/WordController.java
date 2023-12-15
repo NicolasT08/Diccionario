@@ -1,6 +1,7 @@
 package co.edu.uptc.controller;
 
 import co.edu.uptc.model.BinaryTree;
+import co.edu.uptc.model.LinkedList;
 import co.edu.uptc.model.Word;
 
 public class WordController {
@@ -35,7 +36,22 @@ public class WordController {
     }
 
     public String[] findWord(String word) {
-        return null;
+
+        word = word.toLowerCase();
+
+        int pos = this.findIndex( word );
+        Word auxWord = new Word( word,"","" );
+        String[] response = new String[3];
+
+        try{
+            response[0] = dictionary[pos].findNode( auxWord ).getInfo().getId();
+            response[1] = dictionary[pos].findNode( auxWord ).getInfo().getMeaning();
+            response[2] = dictionary[pos].findNode( auxWord ).getInfo().getTranslation();
+        }catch (NullPointerException e){
+            return null;
+        }
+
+        return response;
     }
 
     public String[][] listByFirstChar( char firstCharacter ){
@@ -43,10 +59,49 @@ public class WordController {
     }
 
     public String[][] showAllWords(){
-        return null;
+        int count = 0;
+        for ( int i = 0; i < LETTER_NUM ; i++){
+            if( !dictionary[i].isEmpty() ) count+= dictionary[i].weightTree();
+        }
+
+        if( count == 0 ) return null;
+
+        String[][] response = new String[count][3];
+
+        count = 0;
+
+        for (int i = 0; i < LETTER_NUM; i++) {
+            if (!dictionary[i].isEmpty()) {
+                LinkedList<Word> words = dictionary[i].listInsort();
+
+                for ( int t = 0; t < words.size(); t++ ) {
+                    response[count][0] = words.get(t).getId();
+                    response[count][1] = words.get(t).getMeaning();
+                    response[count][2] = words.get(t).getTranslation();
+                    count++;
+                }
+            }
+        }
+
+
+        return response;
     }
 
     public String updateWord(String newValue, ATT_TYPE att){
         return "";
+    }
+
+    public String[] deleteWord(String word){
+        int index = this.findIndex( word );
+        String[] response = this.findWord( word );
+
+        if( response == null ) return null;
+
+        Word delete = new Word(word.toLowerCase()," "," ");
+
+        dictionary[ index ].deleteNode(dictionary[ index ].findNode(delete));
+
+
+        return response;
     }
 }
