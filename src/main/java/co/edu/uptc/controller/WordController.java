@@ -143,26 +143,41 @@ public class WordController {
         return response;
     }
 
-    public String updateWord(String word, String newValue, ATT_TYPE att){
+    public String[] updateWord(String word, String newValue, ATT_TYPE att){
+        String[] response = new String[3];
         try {
+            word = word.toLowerCase();
+            newValue = newValue.toLowerCase();
+            if ( this.dictionary[this.findIndex(word)].findNode(new Word(word, "", "")) == null ) throw new InvalidWord(word, ERROR_REASON.NOT_FOUND);
             switch ( att ){
                 case WORD -> updateID( word, newValue);
                 case MEANING -> updateMeaning( word,newValue);
                 case TRANSLATE -> updateTranslation( word, newValue);
             }
+            response = att == ATT_TYPE.WORD ? this.findWord(newValue) : this.findWord(word);
         }catch ( InvalidWord e){
-
+            return new String[]{ e.getMessage() };
         }
-        return "";
+
+        return response;
     }
 
     private void updateID( String word, String newValue ){
+        String[] actual = this.findWord(word);
+        if ( actual == null ) throw new InvalidWord( word, ERROR_REASON.NOT_FOUND);
+        this.addWord( newValue, actual[1], actual[2] );
+        if ( this.findWord( newValue ) == null || word.compareToIgnoreCase(newValue) == 0) throw new InvalidWord(newValue, ERROR_REASON.EXIST);
+        this.deleteWord( word );
     }
     private void updateMeaning(String word, String newValue ){
-
+        validateMeaning( newValue );
+        newValue = newValue.replaceAll("\\s+", " ");
+        this.dictionary[this.findIndex(word)].findNode(new Word(word, "", "")).getInfo().setMeaning(newValue);
     }
     private void updateTranslation( String word, String newValue ){
-
+        validateTranslation( newValue );
+        newValue = newValue.replaceAll("\\s+", " ");
+        this.dictionary[this.findIndex(word)].findNode(new Word(word, "", "")).getInfo().setTranslation(newValue);
     }
 
     public String[] deleteWord(String word){
