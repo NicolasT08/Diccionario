@@ -74,8 +74,7 @@ public class WordControllerTest {
         Word[] words ={
                 new Word("uwu", "emoticono tierno", "uwu"),
                 new Word("Árbol", "planta", "tree"),
-                //new Word("arbol", "planta", "tree"),
-                new Word("agua", "líquido", "wa ter"),
+                new Word("agua", "líquido\n Blah\n Bla", "wa ter"),
                 new Word("Madera", "material de árboles", "wood"),
                 new Word("Salir", "Ir a fuera", "Go Out")
 
@@ -103,6 +102,10 @@ public class WordControllerTest {
                 new Word(null,  null, null),
                 new Word("martinez",  "", ""),
                 new Word("estadística",  "", "stadistics"),
+                new Word("arbol", "planta", "tree"),
+                new Word("Maderá", "material de árboles", "wood"),
+                new Word("Madéra", "material de árboles", "wood"),
+                new Word("mádera", "material de árboles", "wood")
         };
 
         for ( Word w : invalidWords ){
@@ -138,6 +141,50 @@ public class WordControllerTest {
             assertEquals(newWords[i].getTranslation(), expectedeResult[i][2]);
         }
     }
+
+    @Test
+    void updateWordTest(){
+
+        assertEquals(1, this.controller.updateWord("oso", "mamífero", ATT_TYPE.WORD).length);
+        assertEquals(1, this.controller.updateWord("torre", "construcción", ATT_TYPE.MEANING).length);
+        assertEquals(1, this.controller.updateWord("sol", "sun", ATT_TYPE.TRANSLATE).length);
+        assertEquals(1, this.controller.updateWord("$", "sun", ATT_TYPE.TRANSLATE).length);
+        assertEquals(1, this.controller.updateWord("54", "sun", ATT_TYPE.TRANSLATE).length);
+        assertEquals(1, this.controller.updateWord("   ", "sun", ATT_TYPE.TRANSLATE).length);
+
+        this.controller.addWord("Hola", "Saludo", "Hi");
+        this.controller.updateWord("hola", "Ola", ATT_TYPE.WORD);
+        assertNotNull( this.controller.findWord("Ola"));
+        assertNull(this.controller.findWord("Hola"));
+
+        this.controller.addWord("pereza", "c", "tired");
+        String[] expected = this.controller.updateWord("Pereza", "cansancio", ATT_TYPE.MEANING);
+        assertEquals(3, expected.length);
+        assertEquals("cansancio", expected[1]);
+        assertEquals("cansancio", this.controller.findWord("pereza")[1]);
+
+        this.controller.addWord("Perro", "canino", "vca");
+        expected = this.controller.updateWord("perro", "dog", ATT_TYPE.TRANSLATE);
+        assertEquals(3, expected.length);
+        assertEquals("dog", expected[2]);
+        assertEquals("dog", this.controller.findWord("perro")[2]);
+
+        this.controller.addWord("Pana", "tela", "Pana");
+        assertEquals(1, this.controller.updateWord("pana", "pana", ATT_TYPE.WORD).length);
+        assertEquals("pana", this.controller.findWord("Pana")[0]);
+
+        this.controller.addWord("flor", "vegetal", "flower");
+        assertEquals(1, this.controller.updateWord("flor", "     ^#&@4", ATT_TYPE.MEANING).length);
+        assertEquals(1, this.controller.updateWord("flor ", "rosas", ATT_TYPE.MEANING).length);
+        assertEquals("vegetal", this.controller.findWord("flor")[1]);
+
+        this.controller.addWord("gato", "felino", "cat");
+        assertEquals(1, this.controller.updateWord("cat", "78as", ATT_TYPE.TRANSLATE).length);
+        assertEquals(1, this.controller.updateWord("cat", "^&", ATT_TYPE.TRANSLATE).length);
+        assertEquals("cat", this.controller.findWord("gato")[2]);
+    }
+
+
     @Test
     void findWord(){
         setup();

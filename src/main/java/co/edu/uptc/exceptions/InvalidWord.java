@@ -6,6 +6,7 @@ public class InvalidWord extends IllegalArgumentException {
     private static final String INVALID_CHARACTERS = " debe contener solamente caracteres alfabéticos!";
     private static final String STARTS_SPACE = " empieza con espacios!";
     private static final String IMPOSSIBLE = " no pertenece a la lengua castellana";
+    private static final String NOT_FOUND = " no ha sido agregada";
 
     private static String getMessage( String word, ERROR_REASON reason ){
         String message = "";
@@ -15,6 +16,7 @@ public class InvalidWord extends IllegalArgumentException {
             case STARTS_SPACE -> message = "La palabra \"" + word + "\" " +  STARTS_SPACE;
             case INVALID_CHARACTERS ->  message = "La palabra \"" + word + "\" " + INVALID_CHARACTERS;
             case IMPOSSIBLE -> message =  "La palabra \"" + word + "\" " + IMPOSSIBLE;
+            case NOT_FOUND -> message = "La palabra \"" + word + "\" " + NOT_FOUND;
         }
         return message;
     }
