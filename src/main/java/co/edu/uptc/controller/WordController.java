@@ -83,6 +83,12 @@ public class WordController {
 
         word = word.toLowerCase();
 
+        try {
+            validateWord( word );
+        } catch ( IllegalArgumentException e ){
+            return null;
+        }
+
         int pos = this.findIndex( word );
         Word auxWord = new Word( word,"","" );
         String[] response = new String[3];

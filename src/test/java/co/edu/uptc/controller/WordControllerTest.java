@@ -142,6 +142,8 @@ public class WordControllerTest {
     void findWord(){
         setup();
 
+        assertNull( controller.findWord( "hu tao" ) );
+
         assertNull(controller.findWord("Paranguaricutirimicuaro"));
 
         controller.addWord("hutao","la asesina de bosses","the boss killer");
@@ -191,17 +193,23 @@ public class WordControllerTest {
     void deleteWord(){
         setup();
 
+        controller.addWord("habitar","Residir o vivir en un lugar","to inhabit");
+
         assertEquals(1 , controller.showAllWords().length);
 
-        controller.addWord("Hutao","la asesina de bosses","the boss killer");
+        controller.addWord("hutao","la asesina de bosses","the boss killer");
 
         String[] huTao = {"hutao","la asesina de bosses","the boss killer"};
 
-        assertArrayEquals(huTao, controller.deleteWord("Hu tao"));
+        assertArrayEquals(huTao, controller.deleteWord("hutao"));
+
+        String[] inhabit = {"habitar","Residir o vivir en un lugar","to inhabit"};
+
+        assertArrayEquals(inhabit, controller.deleteWord("habitar"));
 
         assertNull(controller.deleteWord("goku"));
 
-        assertEquals(0 , controller.showAllWords().length);
+        assertNull( controller.showAllWords() );
 
     }
 }
