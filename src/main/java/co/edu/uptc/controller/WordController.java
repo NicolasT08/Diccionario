@@ -10,9 +10,11 @@ import co.edu.uptc.model.Word;
 public class WordController {
     private BinaryTree<Word>[] dictionary;
     static final int LETTER_NUM = 27;
+    private StringValidator validateWord;
 
     public WordController() {
         this.dictionary = new BinaryTree[LETTER_NUM];
+        this.validateWord = new StringValidator();
         for( int i = 0; i < LETTER_NUM; i++ ){
             this.dictionary[i] = new BinaryTree<>(((o1, o2) -> o1.getId().compareTo(o2.getId())));
         }
@@ -37,9 +39,9 @@ public class WordController {
     public String addWord(String word, String meaning, String translation) {
         String returnMessage = "";
         try {
-            validateWord( word );
-            validateMeaning( meaning );
-            validateTranslation( translation );
+            this.validateWord.validateWord( word );
+            this.validateWord.validateMeaning( meaning );
+            this.validateWord.validateTranslation( translation );
 
             meaning = meaning.replaceAll("\\s+", " ");
             translation = translation.replaceAll("\\s+", " ");
@@ -47,7 +49,7 @@ public class WordController {
             int root = this.findIndex(word);
             Word newWord = new Word( word.toLowerCase(), meaning,translation);
             if ( this.dictionary[root].findNode(newWord) != null) throw new InvalidWord( word, ERROR_REASON.EXIST);
-
+            if ( hasSimilarWord( newWord )) throw new InvalidWord( word, ERROR_REASON.EXIST);
             this.dictionary[root].addNode( newWord );
             returnMessage = "La palabra " + word + " ha sido añadida satisfactoriamente";
 
@@ -55,28 +57,6 @@ public class WordController {
             returnMessage = e.getMessage();
         }
         return returnMessage;
-    }
-
-    private void validateWord( String word ){
-        if ( word == null ) throw  new InvalidWord( word, ERROR_REASON.IS_EMPTY);
-        for( int i = 0; i < word.length(); i++ ){
-            if ( !Character.isAlphabetic(word.charAt(i))) throw new InvalidWord( word, ERROR_REASON.INVALID_CHARACTERS);
-        }
-    }
-
-    private void validateMeaning( String content ){
-        if ( content == null ) throw  new InvalidWord( content, ERROR_REASON.IS_EMPTY);
-        if ( content.isBlank() ) throw new InvalidWord( content, ERROR_REASON.IS_EMPTY);
-        if ( content.startsWith(" ")) throw new InvalidWord( content, ERROR_REASON.STARTS_SPACE);
-    }
-
-    private void validateTranslation( String translation ){
-        if ( translation == null ) throw new InvalidWord(translation, ERROR_REASON.IS_EMPTY);
-        if ( translation.startsWith(" ")) throw new InvalidWord( translation, ERROR_REASON.STARTS_SPACE);
-        for( int i = 0; i < translation.length(); i++ ){
-            if ( translation.charAt(i) == ' ') continue;
-            if ( !Character.isAlphabetic(translation.charAt(i))) throw new InvalidWord( translation, ERROR_REASON.INVALID_CHARACTERS);
-        }
     }
 
     public String[] findWord(String word) {
@@ -170,12 +150,12 @@ public class WordController {
         this.deleteWord( word );
     }
     private void updateMeaning(String word, String newValue ){
-        validateMeaning( newValue );
+        this.validateWord.validateMeaning( newValue );
         newValue = newValue.replaceAll("\\s+", " ");
         this.dictionary[this.findIndex(word)].findNode(new Word(word, "", "")).getInfo().setMeaning(newValue);
     }
     private void updateTranslation( String word, String newValue ){
-        validateTranslation( newValue );
+        this.validateWord.validateTranslation( newValue );
         newValue = newValue.replaceAll("\\s+", " ");
         this.dictionary[this.findIndex(word)].findNode(new Word(word, "", "")).getInfo().setTranslation(newValue);
     }
@@ -193,4 +173,16 @@ public class WordController {
 
         return response;
     }
+
+    private boolean hasSimilarWord( Word word ){
+        String[][] words = this.listByFirstChar( word.getId().charAt(0));
+        if ( words == null ) return false;
+        for ( int i = 0; i < words.length; i++ ){
+            if ( this.validateWord.cleanAccent(words[i][0]).compareTo(this.validateWord.cleanAccent(word.getId())) != 0) continue;
+            if ( words[i][1].replaceAll(" ", "").compareTo(word.getMeaning().replaceAll(" ", "")) == 0) return true;
+        }
+        return false;
+    }
+
+
 }

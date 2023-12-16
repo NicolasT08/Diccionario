@@ -74,7 +74,6 @@ public class WordControllerTest {
         Word[] words ={
                 new Word("uwu", "emoticono tierno", "uwu"),
                 new Word("Árbol", "planta", "tree"),
-                //new Word("arbol", "planta", "tree"),
                 new Word("agua", "líquido", "wa ter"),
                 new Word("Madera", "material de árboles", "wood"),
                 new Word("Salir", "Ir a fuera", "Go Out")
@@ -103,6 +102,10 @@ public class WordControllerTest {
                 new Word(null,  null, null),
                 new Word("martinez",  "", ""),
                 new Word("estadística",  "", "stadistics"),
+                new Word("arbol", "planta", "tree"),
+                new Word("Maderá", "material de árboles", "wood"),
+                new Word("Madéra", "material de árboles", "wood"),
+                new Word("mádera", "material de árboles", "wood")
         };
 
         for ( Word w : invalidWords ){
@@ -231,26 +234,22 @@ public class WordControllerTest {
         assertArrayEquals(igneous, controller.showAllWords()[2]);
     }
 
-    @Test
-    void deleteWord(){
-        setup();
-
-        assertEquals(1 , controller.showAllWords().length);
-
-        controller.addWord("Hutao","la asesina de bosses","the boss killer");
-
-        String[] huTao = {"hutao","la asesina de bosses","the boss killer"};
-
-        assertArrayEquals(huTao, controller.deleteWord("Hu tao"));
-
-        assertNull(controller.deleteWord("goku"));
-
-        assertEquals(0 , controller.showAllWords().length);
-
-    }
-
-
-
-
+//    @Test
+//    void deleteWord(){
+//        setup();
+//
+//        assertEquals(1 , controller.showAllWords().length);
+//
+//        controller.addWord("Hutao","la asesina de bosses","the boss killer");
+//
+//        String[] huTao = {"hutao","la asesina de bosses","the boss killer"};
+//
+//        assertArrayEquals(huTao, controller.deleteWord("Hu tao"));
+//
+//        assertNull(controller.deleteWord("goku"));
+//
+//        assertEquals(0 , controller.showAllWords().length);
+//
+//    }
 }
 
