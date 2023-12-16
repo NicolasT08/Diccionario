@@ -179,7 +179,7 @@ public class WordController {
         if ( words == null ) return false;
         for ( int i = 0; i < words.length; i++ ){
             if ( this.validateWord.cleanAccent(words[i][0]).compareTo(this.validateWord.cleanAccent(word.getId())) != 0) continue;
-            if ( words[i][1].replaceAll(" ", "").compareTo(word.getMeaning().replaceAll(" ", "")) == 0) return true;
+            if ( words[i][1].replaceAll(" ", "").replaceAll("\n", "").compareTo(word.getMeaning().replaceAll(" ", "").replaceAll("\n", "")) == 0) return true;
         }
         return false;
     }

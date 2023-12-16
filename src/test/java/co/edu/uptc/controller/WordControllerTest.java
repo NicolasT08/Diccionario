@@ -74,7 +74,7 @@ public class WordControllerTest {
         Word[] words ={
                 new Word("uwu", "emoticono tierno", "uwu"),
                 new Word("Árbol", "planta", "tree"),
-                new Word("agua", "líquido", "wa ter"),
+                new Word("agua", "líquido\n Blah\n Bla", "wa ter"),
                 new Word("Madera", "material de árboles", "wood"),
                 new Word("Salir", "Ir a fuera", "Go Out")
 
