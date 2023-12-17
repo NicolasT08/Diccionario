@@ -67,6 +67,8 @@ public class FindPanel extends JPanel implements ActionListener {
 
         this.sendButton = new JButton("Buscar");
         this.sendButton.addActionListener( this );
+        this.sendButton.setBackground(new Color(110, 110, 110));
+        this.sendButton.setForeground(Color.WHITE);
 
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -100,7 +102,6 @@ public class FindPanel extends JPanel implements ActionListener {
         this.name.setLineWrap(true);
         this.name.setWrapStyleWord(true);
         this.name.setBackground(new Color(0, 0, 0, 0));
-
 
         this.meaning = new JTextArea();
 

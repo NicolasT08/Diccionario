@@ -71,7 +71,8 @@ public class DeletePanel extends JPanel implements ActionListener{
 
         this.sendButton = new JButton("Eliminar");
         this.sendButton.addActionListener( this );
-
+        this.sendButton.setBackground(new Color(110, 110, 110));
+        this.sendButton.setForeground(Color.WHITE);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);

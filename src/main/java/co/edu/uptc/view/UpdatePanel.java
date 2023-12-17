@@ -76,16 +76,22 @@ public class UpdatePanel extends JPanel implements ActionListener {
         this.word.addActionListener(e -> election = 1);
         this.word.addActionListener(e -> word.setBackground( new Color(143, 219, 143) ) );
         this.word.addActionListener(e -> resetButtons() );
+        this.word.setBackground(new Color(110, 110, 110));
+        this.word.setForeground(Color.WHITE);
 
         this.meaningButton = new JButton("Significado");
         this.meaningButton.addActionListener(e -> election = 2);
         this.meaningButton.addActionListener(e -> meaningButton.setBackground( new Color(143, 219, 143) ) );
         this.meaningButton.addActionListener(e -> resetButtons() );
+        this.meaningButton.setBackground(new Color(110, 110, 110));
+        this.meaningButton.setForeground(Color.WHITE);
 
         this.translationButton = new JButton("Traduccion");
         this.translationButton.addActionListener(e -> election = 3);
         this.translationButton.addActionListener(e -> translationButton.setBackground( new Color(143, 219, 143) ) );
         this.translationButton.addActionListener(e -> resetButtons() );
+        this.translationButton.setBackground(new Color(110, 110, 110));
+        this.translationButton.setForeground(Color.WHITE);
 
         JLabel labelNewAttribute = new JLabel("   Nuevo valor: ");
 
@@ -94,6 +100,8 @@ public class UpdatePanel extends JPanel implements ActionListener {
 
         this.sendButton = new JButton("Actualizar");
         this.sendButton.addActionListener(this);
+        this.sendButton.setBackground(new Color(110, 110, 110));
+        this.sendButton.setForeground(Color.WHITE);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 3, 5);
