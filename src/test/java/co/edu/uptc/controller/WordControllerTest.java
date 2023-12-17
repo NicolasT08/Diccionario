@@ -72,7 +72,7 @@ public class WordControllerTest {
     @Test
     void addWordTest(){
         Word[] words ={
-                new Word("uwu", "emoticono tierno.", ""),
+                new Word("uwu", "emoticono tierno.", "uwu"),
                 new Word("Árbol", "planta", "tree"),
                 new Word("agua", "líquido\n Blah\n Bla", "wa ter"),
                 new Word("Madera", "material de árboles", "wood"),

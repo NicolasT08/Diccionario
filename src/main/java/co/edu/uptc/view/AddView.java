@@ -3,10 +3,11 @@ package co.edu.uptc.view;
 import co.edu.uptc.controller.WordController;
 
 import javax.swing.*;
-import javax.swing.plaf.multi.MultiLabelUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class AddView extends JPanel implements ActionListener {
     private WordController controller;
@@ -26,7 +27,6 @@ public class AddView extends JPanel implements ActionListener {
     public void setupPanel(){
         this.setLayout( new GridLayout(1,2) );
         this.setPreferredSize( new Dimension(450,300));
-        this.setBackground( Color.BLUE);
         this.left = new JPanel();
         this.right = new JPanel();
         this.word = new JTextField();
@@ -44,7 +44,7 @@ public class AddView extends JPanel implements ActionListener {
     }
 
     private void setupRight() {
-        this.right.setBackground( Color.GREEN);
+
         this.right.setLayout( new BorderLayout());
         this.result.setPreferredSize( new Dimension(150,150));
         this.result.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -58,7 +58,6 @@ public class AddView extends JPanel implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(0,30,5,30);
         this.left.setLayout( layout );
-        this.left.setBackground( Color.ORANGE);
 
         this.word.setPreferredSize( new Dimension(200, 30));
         this.meaning.setPreferredSize( new Dimension(200,80));
@@ -120,12 +119,25 @@ public class AddView extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if ( e.getSource() == this.addButton ){
-            this.result.setText( "<html>" + this.controller.addWord( word.getText(), meaning.getText(), translate.getText()) + "</html>");
-            this.word.setText("");
-            this.meaning.setText("");
-            this.translate.setText("");
-
-
+            if ( this.word.getText().isBlank() ){
+                this.result.setText("<html> Digita el valor para la palabra </html>");
+            } else if ( this.meaning.getText().isBlank()) {
+                this.result.setText("<html> Digita el valor para el significado </html>");
+            } else if ( this.translate.getText().isBlank()) {
+                this.result.setText("<html> Digita el valor para la traducción al inglés </html>");
+            }else {
+                this.result.setText( "<html>" + this.controller.addWord( word.getText(), meaning.getText(), translate.getText()) + "</html>");
+                this.word.setText("");
+                this.meaning.setText("");
+                this.translate.setText("");
+            }
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    result.setText("");
+                }
+            },2500);
         }
     }
 }

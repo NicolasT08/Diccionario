@@ -40,6 +40,7 @@ public class StringValidator {
 
     void validateTranslation( String translation ){
         this.isNullField( translation );
+        if ( translation.isBlank() ) throw new InvalidWord( translation, ERROR_REASON.IS_EMPTY);
         if ( translation.startsWith(" ")) throw new InvalidWord( translation, ERROR_REASON.STARTS_SPACE);
         for( int i = 0; i < translation.length(); i++ ){
             if ( translation.charAt(i) == ' ') continue;
