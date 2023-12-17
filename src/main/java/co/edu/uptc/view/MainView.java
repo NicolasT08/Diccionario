@@ -20,15 +20,16 @@ public class MainView extends JFrame{
     private UpdatePanel updatePanel;
     private ListPanel listPanel;
     private FindPanel findPanel;
-
+    private Font customFont;
 
     public MainView(){
         super("Minecraft Dictionary");
+        this.setFont();
         this.controller = new WordController();
         this.deletePanel = new DeletePanel(controller);
         this.findPanel = new FindPanel(controller);
         this.updatePanel = new UpdatePanel(controller);
-        this.add = new AddPanel(controller);
+        this.add = new AddPanel(controller, customFont);
         this.listPanel = new ListPanel(controller);
     }
 
@@ -37,29 +38,47 @@ public class MainView extends JFrame{
         this.setLayout(new BorderLayout(10,100));
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
 
         this.setTabs();
 
         this.add(this.tabs, BorderLayout.CENTER);
 
+        this.setVisible(true);
     }
 
     public void setTabs(){
+        UIManager.put("TabbedPane.selected", new Color(53, 215, 46));
         this.tabs = new JTabbedPane();
         this.tabs.setTabPlacement(SwingConstants.LEFT);
         this.tabs.setBorder( BorderFactory.createEmptyBorder(25,5,25,50));
+        this.tabs.setFont( customFont );
 
+        this.tabs.addTab("Añadir", this.add);
+        this.tabs.addTab("Buscar",this.findPanel);
+        this.tabs.addTab("Actualizar",this.updatePanel);
+        this.tabs.addTab("Listar",  this.listPanel);
+        this.tabs.addTab("Borrar",this.deletePanel);
 
+        this.tabs.setBackgroundAt( 0, new Color(232, 250, 221));
+        this.tabs.setBackgroundAt( 1, new Color(199, 199, 250));
+        this.tabs.setBackgroundAt( 2, new Color(251, 204, 255));
+        this.tabs.setBackgroundAt( 3, new Color(253, 236, 216));
+        this.tabs.setBackgroundAt( 4, new Color(253, 223, 221));
 
-
-
-        this.tabs.addTab("Añadir", null, this.add);
-        this.tabs.addTab("Buscar", null,this.findPanel);
-        this.tabs.addTab("Actualizar",null,this.updatePanel);
-        this.tabs.addTab("Listar", null, this.listPanel);
-        this.tabs.addTab("Borrar",null,this.deletePanel);
 
     }
+
+    public void setFont(){
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("./fonts/pixels.ttf")).deriveFont(20f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(customFont);
+            this.customFont = customFont;
+        } catch (IOException|FontFormatException e) {
+            this.customFont = new Font( "Dialog", Font.PLAIN, 12);
+        }
+    }
+
+
 
 }

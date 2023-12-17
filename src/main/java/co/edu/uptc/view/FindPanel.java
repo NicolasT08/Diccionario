@@ -27,7 +27,7 @@ public class FindPanel extends JPanel implements ActionListener {
     private void setFindPanel(){
         this.setLayout(new GridLayout(1,2));
 
-        this.setBackground("./src/main/java/co/edu/uptc/imgs/Libro abierto.png");
+        this.setBackground("./imgs/Libro abierto.png");
 
         this.setLeftPanel();
 

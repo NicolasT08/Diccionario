@@ -32,7 +32,7 @@ public class UpdatePanel extends JPanel implements ActionListener {
 
     private void setFindPanel(){
         this.setLayout(new GridLayout(1,2));
-        this.setBackground("./src/main/java/co/edu/uptc/imgs/Libro abierto.png");
+        this.setBackground("./imgs/Libro abierto.png");
 
         this.setLeftPanel();
 
@@ -118,6 +118,7 @@ public class UpdatePanel extends JPanel implements ActionListener {
         leftPanel.add( labelAttribute, gbc );
 
         JPanel wordMeaningPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        wordMeaningPanel.setOpaque(false);
         wordMeaningPanel.add(word);
         wordMeaningPanel.add(meaningButton);
         wordMeaningPanel.add(translationButton);

@@ -8,7 +8,7 @@ public class WordPanel extends JPanel {
     public WordPanel(String id, String meaning, String translate) {
         this.setLayout( new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-
+        this.setOpaque(false);
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;

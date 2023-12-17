@@ -12,13 +12,16 @@ public class ListPanel extends JPanel implements ActionListener {
     private JPanel right;
     private JLabel result;
     private WordController controller;
+    private Image background;
 
     public ListPanel(WordController controller) {
         this.controller = controller;
         this.setUp();
+
     }
 
     public void setUp(){
+        this.setBackground("./imgs/Libro abierto.png");
         this.left = new JPanel();
         this.right = new JPanel();
         this.result = new JLabel();
@@ -28,23 +31,49 @@ public class ListPanel extends JPanel implements ActionListener {
 
         this.setupLeft();
         this.setUpRight();
-
+        scroll.setOpaque(false);
+        scroll.getViewport().setOpaque(false);
+        this.left.setOpaque(false);
         this.add( this.left);
         this.add( scroll );
     }
 
-    private void setUpRight() {
-       this.right.setLayout( new GridBagLayout());
-       GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.weighty = 1;
-       this.right.add( new JPanel(), gbc);
+    public void paintComponent(Graphics g) {
+
+        int width = this.getSize().width;
+        int height = this.getSize().height;
+
+        if (this.background != null) {
+            g.drawImage(this.background, 0, 0, width, height, null);
+        }
+
+        super.paintComponent(g);
     }
+
+    public void setBackground(String imagePath) {
+
+        this.setOpaque(false);
+        this.background = new ImageIcon(imagePath).getImage();
+        repaint();
+    }
+
+    private void setUpRight() {
+       this.right.setOpaque(false);
+       this.right.setLayout( new GridBagLayout());
+
+       GridBagConstraints gbc = new GridBagConstraints();
+       gbc.gridwidth = GridBagConstraints.REMAINDER;
+       gbc.weighty = 1;
+       JPanel empty = new JPanel();
+       empty.setOpaque(false);
+       this.right.add( empty, gbc);
+    }
+
 
     private void setupLeft() {
         GridBagConstraints gbc = new GridBagConstraints();
         this.left.setLayout( new GridBagLayout());
-        JButton atoZ = new JButton("A -  Z");
+        JButton atoZ = new JButton("A - Z");
         atoZ.addActionListener( this );
         atoZ.setActionCommand( "all" );
 
@@ -56,6 +85,7 @@ public class ListPanel extends JPanel implements ActionListener {
         this.left.add( atoZ, gbc );
 
         JPanel alphabet = new JPanel();
+        alphabet.setOpaque(false);
         gbc.gridy = 1;
         gbc.weightx = 1;
         gbc.insets.right = 30;
