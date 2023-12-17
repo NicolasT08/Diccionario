@@ -17,6 +17,7 @@ public class FindPanel extends JPanel implements ActionListener {
     private JTextArea name;
     private JTextArea meaning;
     private JTextArea translation;
+    private Image background;
 
     FindPanel(WordController controller){
         this.controller = controller;
@@ -24,8 +25,9 @@ public class FindPanel extends JPanel implements ActionListener {
     }
 
     private void setFindPanel(){
-        this.setLayout(null);
         this.setLayout(new GridLayout(1,2));
+
+        this.setBackground("./src/main/java/co/edu/uptc/imgs/Libro abierto.png");
 
         this.setLeftPanel();
 
@@ -35,8 +37,28 @@ public class FindPanel extends JPanel implements ActionListener {
         this.add(rightPanel);
     }
 
+    public void paintComponent(Graphics g) {
+
+        int width = this.getSize().width;
+        int height = this.getSize().height;
+
+        if (this.background != null) {
+            g.drawImage(this.background, 0, 0, width, height, null);
+        }
+
+        super.paintComponent(g);
+    }
+
+    public void setBackground(String imagePath) {
+
+        this.setOpaque(false);
+        this.background = new ImageIcon(imagePath).getImage();
+        repaint();
+    }
+
     private void setLeftPanel(){
         this.leftPanel = new JPanel( new GridBagLayout() );
+        leftPanel.setOpaque(false);
 
         JLabel labelWord = new JLabel("Palabra: ");
 
@@ -68,6 +90,7 @@ public class FindPanel extends JPanel implements ActionListener {
 
     private void setRightPanel(){
         this.rightPanel = new JPanel(new GridBagLayout());
+        rightPanel.setOpaque(false);
 
         this.name = new JTextArea();
 

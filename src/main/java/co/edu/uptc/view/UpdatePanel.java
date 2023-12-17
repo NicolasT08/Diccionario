@@ -23,6 +23,7 @@ public class UpdatePanel extends JPanel implements ActionListener {
     private JButton word;
     private JButton meaningButton;
     private JButton translationButton;
+    private Image background;
 
     UpdatePanel(WordController controller){
         this.controller = controller;
@@ -30,8 +31,8 @@ public class UpdatePanel extends JPanel implements ActionListener {
     }
 
     private void setFindPanel(){
-        this.setLayout(null);
         this.setLayout(new GridLayout(1,2));
+        this.setBackground("./src/main/java/co/edu/uptc/imgs/Libro abierto.png");
 
         this.setLeftPanel();
 
@@ -41,15 +42,35 @@ public class UpdatePanel extends JPanel implements ActionListener {
         this.add(rightPanel);
     }
 
+    public void paintComponent(Graphics g) {
+
+        int width = this.getSize().width;
+        int height = this.getSize().height;
+
+        if (this.background != null) {
+            g.drawImage(this.background, 0, 0, width, height, null);
+        }
+
+        super.paintComponent(g);
+    }
+
+    public void setBackground(String imagePath) {
+
+        this.setOpaque(false);
+        this.background = new ImageIcon(imagePath).getImage();
+        repaint();
+    }
+
     private void setLeftPanel(){
         this.leftPanel = new JPanel(new GridBagLayout());
+        this.leftPanel.setOpaque(false);
 
-        JLabel labelWord = new JLabel("Palabra: ");
+        JLabel labelWord = new JLabel("   Palabra: ");
 
         this.textWord = new JTextField();
-        this.textWord.setPreferredSize( new Dimension(290, 30) );
+        this.textWord.setPreferredSize( new Dimension(280, 30) );
 
-        JLabel labelAttribute = new JLabel("Atributo a cambiar:");
+        JLabel labelAttribute = new JLabel("  Atributo a cambiar:");
 
         this.word = new JButton("Palabra");
         this.word.addActionListener(e -> election = 1);
@@ -66,10 +87,10 @@ public class UpdatePanel extends JPanel implements ActionListener {
         this.translationButton.addActionListener(e -> translationButton.setBackground( new Color(143, 219, 143) ) );
         this.translationButton.addActionListener(e -> resetButtons() );
 
-        JLabel labelNewAttribute = new JLabel("Nuevo valor: ");
+        JLabel labelNewAttribute = new JLabel("   Nuevo valor: ");
 
         this.textNewValue = new JTextField();
-        this.textNewValue.setPreferredSize( new Dimension(290, 30) );
+        this.textNewValue.setPreferredSize( new Dimension(280, 30) );
 
         this.sendButton = new JButton("Actualizar");
         this.sendButton.addActionListener(this);
@@ -130,6 +151,7 @@ public class UpdatePanel extends JPanel implements ActionListener {
 
     private void setRightPanel(){
         this.rightPanel = new JPanel(new GridBagLayout());
+        this.rightPanel.setOpaque(false);
 
         this.name = new JTextArea();
 

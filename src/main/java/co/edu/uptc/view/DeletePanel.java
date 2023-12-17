@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DeletePanel extends JPanel implements ActionListener{
 
@@ -16,6 +18,7 @@ public class DeletePanel extends JPanel implements ActionListener{
     private JPanel rightPanel;
     private JLabel rightLabel;
     private boolean successfully;
+    private Image background;
 
     DeletePanel(WordController controller){
         this.controller = controller;
@@ -24,21 +27,42 @@ public class DeletePanel extends JPanel implements ActionListener{
     }
 
     private void setDeleteTable(){
-        this.setLayout(null);
         this.setLayout(new GridLayout(1,2));
+        this.setBackground("./src/main/java/co/edu/uptc/imgs/Libro abierto.png");
 
         this.setLeftPanel();
 
         rightPanel = new JPanel(new GridBagLayout());
         rightLabel = new JLabel();
         rightPanel.add(rightLabel);
+        rightPanel.setOpaque(false);
 
         this.add(leftPanel);
         this.add(rightPanel);
     }
 
+    public void paintComponent(Graphics g) {
+
+        int width = this.getSize().width;
+        int height = this.getSize().height;
+
+        if (this.background != null) {
+            g.drawImage(this.background, 0, 0, width, height, null);
+        }
+
+        super.paintComponent(g);
+    }
+
+    public void setBackground(String imagePath) {
+
+        this.setOpaque(false);
+        this.background = new ImageIcon(imagePath).getImage();
+        repaint();
+    }
+
     private void setLeftPanel(){
         this.leftPanel = new JPanel( new GridBagLayout() );
+        leftPanel.setOpaque(false);
 
         JLabel labelWord = new JLabel("Palabra: ");
 
@@ -88,6 +112,13 @@ public class DeletePanel extends JPanel implements ActionListener{
                 }
             }
         }
+        java.util.Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                rightLabel.setText("");
+            }
+        },4500);
     }
 
     private void updateRightLabel() {
