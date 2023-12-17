@@ -228,11 +228,15 @@ public class UpdatePanel extends JPanel implements ActionListener {
                         response = controller.updateWord(textWord.getText(),textNewValue.getText(), ATT_TYPE.TRANSLATE);
                         break;
                 }
-                this.name.setText( response[0] );
-                this.meaning.setText("Definición: " + response[1] );
-                this.translation.setText("Traducción: " +  response[2] );
+                if( response.length < 2){
+                    this.meaning.setText(response[0]);
+                }else {
+                    this.name.setText( response[0] );
+                    this.meaning.setText("Definición: " + response[1] );
+                    this.translation.setText("Traducción: " +  response[2] );
+                    this.resetValues();
+                }
 
-                this.resetValues();
             }
         }
     }
