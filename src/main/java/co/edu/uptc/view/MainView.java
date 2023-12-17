@@ -15,6 +15,7 @@ public class MainView extends JFrame{
     private JTabbedPane tabs;
     private WordController controller;
     private DeletePanel deletePanel;
+    private UpdatePanel updatePanel;
     private FindPanel findPanel;
 
     public MainView(){
@@ -22,6 +23,7 @@ public class MainView extends JFrame{
         this.controller = new WordController();
         this.deletePanel = new DeletePanel(controller);
         this.findPanel = new FindPanel(controller);
+        this.updatePanel = new UpdatePanel(controller);
     }
 
     public void initialize(){
@@ -41,8 +43,8 @@ public class MainView extends JFrame{
         this.tabs.setTabPlacement(SwingConstants.LEFT);
         this.tabs.setBorder( BorderFactory.createEmptyBorder(25,5,25,50));
 
-
-        this.tabs.addTab("Buscar", this.findPanel);
+        this.tabs.addTab("Buscar", null,this.findPanel);
+        this.tabs.addTab("Actualizar",null,this.updatePanel);
         this.tabs.addTab("Borrar",null,this.deletePanel);
     }
 }

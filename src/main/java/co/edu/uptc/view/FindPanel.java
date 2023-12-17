@@ -134,6 +134,7 @@ public class FindPanel extends JPanel implements ActionListener {
                 this.name.setText( response[0] );
                 this.meaning.setText("Definición: " + response[1] );
                 this.translation.setText("Traducción: " +  response[2] );
+                this.textWord.setText("");
             }
         }
     }

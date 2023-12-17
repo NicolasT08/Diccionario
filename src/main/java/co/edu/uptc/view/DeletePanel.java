@@ -72,7 +72,7 @@ public class DeletePanel extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if( e.getSource() == sendButton){
             if( textWord.getText().length() == 0 ){
-                this.rightLabel.setText("porfavor digita una palabra");
+                this.rightLabel.setText("Porfavor digita una palabra");
                 this.textWord.setText("");
             } else {
                 if ( !textWord.getText().isEmpty() ){
@@ -81,10 +81,10 @@ public class DeletePanel extends JPanel implements ActionListener{
                     if ( result == JOptionPane.YES_OPTION && !textWord.getText().isEmpty() ) {
                         if( controller.deleteWord(textWord.getText()) != null ){
                             successfully = true;
-                            this.textWord.setText("");
                         }
                         updateRightLabel();
                     }
+                    this.textWord.setText("");
                 }
             }
         }
