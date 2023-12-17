@@ -198,20 +198,17 @@ public class UpdatePanel extends JPanel implements ActionListener {
                 this.name.setText("");
                 this.translation.setText("");
 
-                this.resetValues();
 
             }else if( this.textNewValue.getText().isEmpty() ){
                 this.meaning.setText("Porfavor digita el nuevo valor");
                 this.name.setText("");
                 this.translation.setText("");
 
-                this.resetValues();
             }else if(election == 0){
-                this.meaning.setText("Porfavor digita el nuevo valor");
+                this.meaning.setText("Porfavor seleccione el atributo a cambiar");
                 this.name.setText("");
                 this.translation.setText("");
 
-                this.resetValues();
             }else if ( controller.findWord(textWord.getText()) == null ) {
                 this.meaning.setText("No se encontro la palabra " + textWord.getText());
                 this.name.setText("");
