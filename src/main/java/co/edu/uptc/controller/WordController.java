@@ -18,6 +18,19 @@ public class WordController {
         for( int i = 0; i < LETTER_NUM; i++ ){
             this.dictionary[i] = new BinaryTree<>(((o1, o2) -> o1.getId().compareTo(o2.getId())));
         }
+        dictionary[7].addNode(new Word("hutao","Hu Tao es una joven esbelta y delgada de piel clara y ojos color escarlata con patrones florales. Tiene cabello largo y de color castaño que se separa en colas gemelas, con los extremos sumergidos en carmesí claro.\n" +
+                "\n" +
+                "Su Visión Pyro está incrustada en la parte posterior de su abrigo. Lleva un sombrero marrón oscuro con flores rojas, ramas, y un talismán de madera unido a la parte delantera.\n" +
+                "\n" +
+                "Lleva una camisa roja tradicional debajo de su abrigo oscuro, con un cuello de mandarina. Tiene broches dorados unidos debajo del cuello y a la cintura de su abrigo, tiene largas capas rectangulares. Además, lleva un par de calcetines blancos con flores rojas a juego y zapatos de vestir de tacón marrones.\n" +
+                "\n" +
+                "Personalidad","Hu Tao es una joven esbelta y delgada de piel clara y ojos color escarlata con patrones florales. Tiene cabello largo y de color castaño que se separa en colas gemelas, con los extremos sumergidos en carmesí claro.\n" +
+                "\n" +
+                "Su Visión Pyro está incrustada en la parte posterior de su abrigo. Lleva un sombrero marrón oscuro con flores rojas, ramas, y un talismán de madera unido a la parte delantera.\n" +
+                "\n" +
+                "Lleva una camisa roja tradicional debajo de su abrigo oscuro, con un cuello de mandarina. Tiene broches dorados unidos debajo del cuello y a la cintura de su abrigo, tiene largas capas rectangulares. Además, lleva un par de calcetines blancos con flores rojas a juego y zapatos de vestir de tacón marrones.\n" +
+                "\n" +
+                "Personalidad"));
     }
 
     public int findIndex( String word ) throws IllegalArgumentException{
