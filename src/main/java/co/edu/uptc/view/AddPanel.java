@@ -6,10 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class AddView extends JPanel implements ActionListener {
+public class AddPanel extends JPanel implements ActionListener {
     private WordController controller;
     private JPanel left;
     private JPanel right;
@@ -18,7 +22,8 @@ public class AddView extends JPanel implements ActionListener {
     private JTextArea meaning;
     private JLabel result;
     private JButton addButton;
-    public AddView( WordController controller){
+
+    public AddPanel(WordController controller){
         super();
         this.controller = controller;
         this.setupPanel();
@@ -51,6 +56,7 @@ public class AddView extends JPanel implements ActionListener {
         this.result.setBorder( BorderFactory.createEmptyBorder(0,30,0,30));
         this.result.setHorizontalAlignment(SwingConstants.CENTER);
         this.right.add(this.result, BorderLayout.CENTER);
+
     }
 
     private void setupLeft() {
@@ -60,7 +66,8 @@ public class AddView extends JPanel implements ActionListener {
         this.left.setLayout( layout );
 
         this.word.setPreferredSize( new Dimension(200, 30));
-        this.meaning.setPreferredSize( new Dimension(200,80));
+        this.meaning.setLineWrap(true);
+        this.meaning.setWrapStyleWord(true);
         this.translate.setPreferredSize( new Dimension(200,30));
         this.addButton.setText(" Añadir ");
         this.addButton.addActionListener(this);
@@ -90,7 +97,9 @@ public class AddView extends JPanel implements ActionListener {
 
         gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.CENTER;
-        this.left.add( this.meaning, gbc );
+        JScrollPane scroll = new JScrollPane( this.meaning );
+        scroll.setPreferredSize( new Dimension(200,100));
+        this.left.add( scroll, gbc );
 
         gbc.insets.top = 10;
 
@@ -137,7 +146,7 @@ public class AddView extends JPanel implements ActionListener {
                 public void run() {
                     result.setText("");
                 }
-            },2500);
+            },4500);
         }
     }
 }

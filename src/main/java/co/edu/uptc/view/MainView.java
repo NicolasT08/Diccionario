@@ -3,20 +3,22 @@ package co.edu.uptc.view;
 import co.edu.uptc.controller.WordController;
 
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainView extends JFrame{
 
     private JTabbedPane tabs;
-    private AddView add;
+    private AddPanel add;
     private WordController controller;
     private DeletePanel deletePanel;
     private UpdatePanel updatePanel;
+    private ListPanel listPanel;
     private FindPanel findPanel;
 
 
@@ -26,7 +28,8 @@ public class MainView extends JFrame{
         this.deletePanel = new DeletePanel(controller);
         this.findPanel = new FindPanel(controller);
         this.updatePanel = new UpdatePanel(controller);
-        this.add = new AddView(controller);
+        this.add = new AddPanel(controller);
+        this.listPanel = new ListPanel(controller);
     }
 
     public void initialize(){
@@ -47,9 +50,16 @@ public class MainView extends JFrame{
         this.tabs.setTabPlacement(SwingConstants.LEFT);
         this.tabs.setBorder( BorderFactory.createEmptyBorder(25,5,25,50));
 
+
+
+
+
         this.tabs.addTab("Añadir", null, this.add);
         this.tabs.addTab("Buscar", null,this.findPanel);
         this.tabs.addTab("Actualizar",null,this.updatePanel);
+        this.tabs.addTab("Listar", null, this.listPanel);
         this.tabs.addTab("Borrar",null,this.deletePanel);
+
     }
+
 }
