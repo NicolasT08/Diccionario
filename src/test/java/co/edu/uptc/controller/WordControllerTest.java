@@ -72,10 +72,11 @@ public class WordControllerTest {
     @Test
     void addWordTest(){
         Word[] words ={
-                new Word("uwu", "emoticono tierno", "uwu"),
+                new Word("uwu", "emoticono tierno.", ""),
                 new Word("Árbol", "planta", "tree"),
                 new Word("agua", "líquido\n Blah\n Bla", "wa ter"),
                 new Word("Madera", "material de árboles", "wood"),
+                new Word("Hola", "Saludo!", "wood"),
                 new Word("Salir", "Ir a fuera", "Go Out")
 
         };
@@ -88,12 +89,12 @@ public class WordControllerTest {
         }
 
         Word[] invalidWords = {
-                new Word("1", "uno", "one"),
+                new Word("", "uno", "one"),
                 new Word("$tos", "palabra grosera", "rude"),
                 new Word("µvaca", "vaquita", "cow"),
                 new Word("µvaca", "vaquita", "cow"),
                 new Word("pera", "     ", " "),
-                new Word("uva", "fruta morada.", " "),
+                new Word("uva", "", ""),
                 new Word(null, "fruta morada.", "grape"),
                 new Word(" paz", "fruta morada.", "grape"),
                 new Word("paz", "  fruta morada.", "grape"),
@@ -105,7 +106,8 @@ public class WordControllerTest {
                 new Word("arbol", "planta", "tree"),
                 new Word("Maderá", "material de árboles", "wood"),
                 new Word("Madéra", "material de árboles", "wood"),
-                new Word("mádera", "material de árboles", "wood")
+                new Word("mádera", "material de árboles", "wood"),
+                new Word("mádera", "$^&#^&@@", "wood")
         };
 
         for ( Word w : invalidWords ){
@@ -156,6 +158,7 @@ public class WordControllerTest {
         this.controller.updateWord("hola", "Ola", ATT_TYPE.WORD);
         assertNotNull( this.controller.findWord("Ola"));
         assertNull(this.controller.findWord("Hola"));
+
 
         this.controller.addWord("pereza", "c", "tired");
         String[] expected = this.controller.updateWord("Pereza", "cansancio", ATT_TYPE.MEANING);

@@ -43,11 +43,13 @@ public class WordController {
             this.validateWord.validateMeaning( meaning );
             this.validateWord.validateTranslation( translation );
 
+
             meaning = meaning.replaceAll("\\s+", " ");
             translation = translation.replaceAll("\\s+", " ");
 
             int root = this.findIndex(word);
-            Word newWord = new Word( word.toLowerCase(), meaning,translation);
+            translation = translation.isEmpty() ? word.toLowerCase() : translation;
+            Word newWord = new Word(word.toLowerCase(), meaning,translation);
             if ( this.dictionary[root].findNode(newWord) != null) throw new InvalidWord( word, ERROR_REASON.EXIST);
             if ( hasSimilarWord( newWord )) throw new InvalidWord( word, ERROR_REASON.EXIST);
             this.dictionary[root].addNode( newWord );
@@ -151,6 +153,7 @@ public class WordController {
     private void updateID( String word, String newValue ){
         String[] actual = this.findWord(word);
         if ( actual == null ) throw new InvalidWord( word, ERROR_REASON.NOT_FOUND);
+        if ( this.findWord( newValue ) != null )throw new InvalidWord(newValue, ERROR_REASON.EXIST);
         this.addWord( newValue, actual[1], actual[2] );
         if ( this.findWord( newValue ) == null || word.compareToIgnoreCase(newValue) == 0) throw new InvalidWord(newValue, ERROR_REASON.EXIST);
         this.deleteWord( word );

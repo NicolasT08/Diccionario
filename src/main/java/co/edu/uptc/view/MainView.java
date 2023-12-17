@@ -8,7 +8,9 @@ import java.awt.*;
 public class MainView extends JFrame {
 
     private JTabbedPane tabs;
+    private AddView add;
     private WordController controller;
+
 
     public MainView(){
         super("Minecraft Dictionary");
@@ -25,15 +27,15 @@ public class MainView extends JFrame {
         this.setTabs();
 
         this.add(this.tabs, BorderLayout.CENTER);
+
     }
 
     public void setTabs(){
         this.tabs = new JTabbedPane();
         this.tabs.setTabPlacement(SwingConstants.LEFT);
         this.tabs.setBorder( BorderFactory.createEmptyBorder(25,5,25,50));
-        JPanel jp = new JPanel();
-        jp.setBackground( new Color(120,120,30));
 
-        this.tabs.addTab("Actualizar", null, jp);
+        this.add = new AddView( this.controller );
+        this.tabs.addTab("Añadir", null, this.add);
     }
 }
