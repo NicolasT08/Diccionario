@@ -131,11 +131,7 @@ public class DeletePanel extends JPanel implements ActionListener{
 
     private void updateRightLabel() {
         if (successfully) {
-            if ( textWord.getText().length() <= 20 ) {
-                this.rightLabel.setText("La palabra " + textWord.getText() + " ha sido borrada satisfactoriamente");
-            } else {
-                this.rightLabel.setText("<html>La palabra " + textWord.getText() + "<br> ha sido borrada satisfactoriamente</html>");
-            }
+            this.rightLabel.setText("<html>La palabra " + textWord.getText() + "<br> ha sido borrada satisfactoriamente</html>");
         }else {
             this.rightLabel.setText("No se pudo eliminar la palabra " + textWord.getText());
         }
