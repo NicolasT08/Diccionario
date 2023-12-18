@@ -133,7 +133,7 @@ public class DeletePanel extends JPanel implements ActionListener{
         if (successfully) {
             this.rightLabel.setText("<html>La palabra " + textWord.getText() + "<br> ha sido borrada satisfactoriamente</html>");
         }else {
-            this.rightLabel.setText("No se pudo eliminar la palabra " + textWord.getText());
+            this.rightLabel.setText("<html>La palabra " + textWord.getText() + "<br> no pudo ser eliminada</html>");
         }
         this.textWord.setText("");
     }
