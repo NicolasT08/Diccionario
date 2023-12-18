@@ -8,6 +8,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class creates a JPanel to update a word in the dictionary.
+ * It includes user interface components to enter the word to update,
+ * three buttons to choose the attribute to update, a text field to
+ * enter the new value and a button to start the update process. The
+ * class communicates with a WordController in order to perform word
+ * update.
+ *
+ * @Author Nicolas Tinjaca
+ */
+
 public class UpdatePanel extends JPanel implements ActionListener {
 
     private WordController controller;
@@ -32,6 +43,12 @@ public class UpdatePanel extends JPanel implements ActionListener {
         this.setFindPanel();
     }
 
+    /**
+     * Configure the layout, background, and word update panel components.
+     * The word update panel consists of two main panels: the left panel
+     * and right panel.
+     */
+
     private void setFindPanel(){
         this.setLayout(new GridLayout(1,2));
         this.setBackground("./imgs/Libro abierto.png");
@@ -43,6 +60,15 @@ public class UpdatePanel extends JPanel implements ActionListener {
         this.add(leftPanel);
         this.add(rightPanel);
     }
+
+    /**
+     * Overrides the paintComponent method to place a custom
+     * panel background image, gets the width and height of the
+     * panel, uses the Graphics object to draw the image. The method
+     * then calls the superclass's paintComponent to ensure proper rendering.
+     *
+     * @param g Graphics object used for painting.
+     */
 
     public void paintComponent(Graphics g) {
 
@@ -56,12 +82,29 @@ public class UpdatePanel extends JPanel implements ActionListener {
         super.paintComponent(g);
     }
 
+    /**
+     * Sets the background image of the panel using the provided file path.
+     * It makes the panel transparent and assigns the specified image to the
+     * background variable. The repaint method is called to update the display.
+     *
+     * @param imagePath File path of the background image.
+     */
+
     public void setBackground(String imagePath) {
 
         this.setOpaque(false);
         this.background = new ImageIcon(imagePath).getImage();
         repaint();
     }
+
+    /**
+     * Sets up the left panel with user input components that include three labels to
+     * tell the user the functionality of each field, a text field for entering the word
+     * to be updated, three buttons to select the attribute to change, a text field for input
+     * the new value, and a button for confirming the update of the word.The leftPanel is
+     * configured with a GridBagLayout, and its background is set to be
+     * transparent.
+     */
 
     private void setLeftPanel(){
         this.leftPanel = new JPanel(new GridBagLayout());
@@ -179,6 +222,14 @@ public class UpdatePanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Sets up the right panel that shows the information of the word after being updated,
+     * includes three text areas that shows the word, the meaning of
+     * the word and the translation of the word in the English language.
+     * The right Panel is configured with a GridBagLayout, and its background
+     * is set to be transparent.
+     */
+
     private void setRightPanel(){
         this.rightPanel = new JPanel(new GridBagLayout());
         this.rightPanel.setOpaque(false);
@@ -230,6 +281,12 @@ public class UpdatePanel extends JPanel implements ActionListener {
         rightPanel.add( translation, gbc );
 
     }
+
+    /**
+     * This method resets the background color of the attribute
+     * selection buttons in the left panel
+     */
+
     private void resetButtons() {
         this.word.setBackground(new Color(110, 110, 110));
         this.word.setForeground(Color.WHITE);
@@ -241,12 +298,32 @@ public class UpdatePanel extends JPanel implements ActionListener {
         this.translationButton.setForeground(Color.WHITE);
     }
 
+    /**
+     * This method resets the input fields, and the election
+     * attribute of the left panel and calls the method to
+     * reset the color of the buttons
+     */
+
     private void resetValues(){
         this.textWord.setText("");
         this.textNewValue.setText("");
         this.election = 0;
         this.resetButtons();
     }
+
+    /**
+     * Handles button click events for the sendButton. It checks if the
+     * textWord field is empty and displays an error message, after
+     * that if the text field of hte new value is empty, displays a different
+     * error message, and also do that if the user does not click any attribute button,
+     * and if the controller's find method, does not find the word display another
+     * error message, finally calls the controller's UpdateWord method, and updates
+     * the text areas with the name, meaning and translation of the update word,
+     * and reset the left inputs fields
+     *
+     * @param e ActionEvent object representing the button click event.
+     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if( e.getSource() == sendButton){

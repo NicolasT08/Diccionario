@@ -9,6 +9,14 @@ import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This class creates a JPanel to remove words. It includes user
+ * interface components to enter the word to delete and a button
+ * to start the deletion process. The class communicates with a
+ * WordController in order to perform word deletion.
+ * @Author Nicolas Tinjaca
+ */
+
 public class DeletePanel extends JPanel implements ActionListener{
 
     private WordController controller;
@@ -28,6 +36,12 @@ public class DeletePanel extends JPanel implements ActionListener{
         setDeleteTable();
     }
 
+    /**
+     * Set up the layout, background, and components of the Delete
+     * Panel. The DeletePanel consists of two main panels: the
+     * left panel, and the right panel
+     */
+
     private void setDeleteTable(){
         this.setLayout(new GridLayout(1,2));
         this.setBackground("./imgs/Libro abierto.png");
@@ -44,6 +58,15 @@ public class DeletePanel extends JPanel implements ActionListener{
         this.add(rightPanel);
     }
 
+    /**
+     * Overrides the paintComponent method to place a custom
+     * panel background image, gets the width and height of the
+     * panel, uses the Graphics object to draw the image. The method
+     * then calls the superclass's paintComponent to ensure proper rendering.
+     *
+     * @param g Graphics object used for painting.
+     */
+
     public void paintComponent(Graphics g) {
 
         int width = this.getSize().width;
@@ -56,12 +79,27 @@ public class DeletePanel extends JPanel implements ActionListener{
         super.paintComponent(g);
     }
 
+    /**
+     * Sets the background image of the panel using the provided file path.
+     * It makes the panel transparent and assigns the specified image to the
+     * background variable. The repaint method is called to update the display.
+     *
+     * @param imagePath File path of the background image.
+     */
+
     public void setBackground(String imagePath) {
 
         this.setOpaque(false);
         this.background = new ImageIcon(imagePath).getImage();
         repaint();
     }
+
+    /**
+     * Sets up the leftPanel with user input components, including a label, a text field
+     * for entering the word to be deleted, and a button for confirming the deletion.
+     * The leftPanel is configured with a GridBagLayout, and its background is set to be
+     * transparent.
+     */
 
     private void setLeftPanel(){
         this.leftPanel = new JPanel( new GridBagLayout() );
@@ -98,6 +136,16 @@ public class DeletePanel extends JPanel implements ActionListener{
         leftPanel.add( sendButton, gbc );
     }
 
+    /**
+     * Handles button click events for the sendButton. It checks if the
+     * textWord field is empty and displays an error message. If the field
+     * is not empty, it shows a confirmation dialog. If the user confirms deletion, it
+     * calls the controller's deleteWord method, updates the rightLabel, and starts a
+     * timer to clear the message after a certain delay.
+     *
+     * @param e ActionEvent object representing the button click event.
+     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if( e.getSource() == sendButton){
@@ -128,6 +176,12 @@ public class DeletePanel extends JPanel implements ActionListener{
             }
         },2500);
     }
+
+    /**
+     * Updates the rightLabel message in the right panel with a
+     * success or failure message depending on the result of the
+     * delete word process.
+     */
 
     private void updateRightLabel() {
         if (successfully) {

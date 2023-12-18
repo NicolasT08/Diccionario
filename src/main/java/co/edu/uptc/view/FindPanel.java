@@ -7,6 +7,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class creates a JPanel to find a word in the dictionary.
+ * It includes user interface components to enter the word to search
+ * and a button to start the search process in all the words of the
+ * dictionary. The class communicates with a WordController in order
+ * to perform word search.
+ * @Author Nicolas Tinjaca
+ */
+
 public class FindPanel extends JPanel implements ActionListener {
 
     private WordController controller;
@@ -26,6 +35,12 @@ public class FindPanel extends JPanel implements ActionListener {
         setFindPanel();
     }
 
+    /**
+     * Configure the layout, background, and word find panel components.
+     * The word find panel consists of two main panels: the left panel
+     * and right panel.
+     */
+
     private void setFindPanel(){
         this.setLayout(new GridLayout(1,2));
 
@@ -39,6 +54,15 @@ public class FindPanel extends JPanel implements ActionListener {
         this.add(rightPanel);
     }
 
+    /**
+     * Overrides the paintComponent method to place a custom
+     * panel background image, gets the width and height of the
+     * panel, uses the Graphics object to draw the image. The method
+     * then calls the superclass's paintComponent to ensure proper rendering.
+     *
+     * @param g Graphics object used for painting.
+     */
+
     public void paintComponent(Graphics g) {
 
         int width = this.getSize().width;
@@ -51,12 +75,27 @@ public class FindPanel extends JPanel implements ActionListener {
         super.paintComponent(g);
     }
 
+    /**
+     * Sets the background image of the panel using the provided file path.
+     * It makes the panel transparent and assigns the specified image to the
+     * background variable. The repaint method is called to update the display.
+     *
+     * @param imagePath File path of the background image.
+     */
+
     public void setBackground(String imagePath) {
 
         this.setOpaque(false);
         this.background = new ImageIcon(imagePath).getImage();
         repaint();
     }
+
+    /**
+     * Sets up the leftPanel with user input components, including a label, a
+     * text field for entering the word to search, and a button to confirm the
+     * start of the word search process. The leftPanel is configured with a
+     * GridBagLayout, and its background is set to be transparent.
+     */
 
     private void setLeftPanel(){
         this.leftPanel = new JPanel( new GridBagLayout() );
@@ -93,6 +132,14 @@ public class FindPanel extends JPanel implements ActionListener {
         gbc.insets = new Insets(20, 0, 0, 0);
         leftPanel.add( sendButton, gbc );
     }
+
+    /**
+     * Sets up the right panel that shows the information of the found word,
+     * includes three text areas that shows the word found, the meaning of
+     * the word and the translation of the word in the English language.
+     * The right Panel is configured with a GridBagLayout, and its background
+     * is set to be transparent.
+     */
 
     private void setRightPanel(){
         this.rightPanel = new JPanel(new GridBagLayout());
@@ -146,6 +193,18 @@ public class FindPanel extends JPanel implements ActionListener {
         rightPanel.add( translation, gbc );
 
     }
+
+    /**
+     * Handles button click events for the sendButton. It checks if the
+     * textWord field is empty and displays an error message, after
+     * that if the controller's find method, does not find the word display another
+     * error message If the field is not empty, and the method find the word updates
+     * the text areas with the name, meaning and translation of the found word,
+     * and reset the left panel text field.
+     *
+     * @param e ActionEvent object representing the button click event.
+     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if( e.getSource() == sendButton){
