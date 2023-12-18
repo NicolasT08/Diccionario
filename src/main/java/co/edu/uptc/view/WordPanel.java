@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class WordPanel extends JPanel {
 
-    public WordPanel(String id, String meaning, String translate) {
+    public WordPanel(String id, String meaning, String translate, Font font) {
         this.setLayout( new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         this.setOpaque(false);
@@ -20,15 +20,17 @@ public class WordPanel extends JPanel {
         idLabel.setLineWrap(true);
         idLabel.setWrapStyleWord(true);
         idLabel.setBackground(new Color(0, 0, 0, 0));
+        idLabel.setFont( font );
         this.add( idLabel , gbc );
 
         JTextArea meaningLabel = new JTextArea( "Definición: " + meaning );
         gbc.gridy = 1;
-        meaningLabel.setMinimumSize(new Dimension(330, 20));
+        meaningLabel.setMinimumSize(new Dimension(330, 50));
         meaningLabel.setOpaque(false);
         meaningLabel.setLineWrap(true);
         meaningLabel.setWrapStyleWord(true);
         meaningLabel.setBackground(new Color(0, 0, 0, 0));
+        meaningLabel.setFont( font );
         this.add( meaningLabel , gbc );
 
         JTextArea translateLabel = new JTextArea( "Traducción: " + translate );
@@ -38,6 +40,7 @@ public class WordPanel extends JPanel {
         translateLabel.setLineWrap(true);
         translateLabel.setWrapStyleWord(true);
         translateLabel.setBackground(new Color(0, 0, 0, 0));
+        translateLabel.setFont( font );
         this.add( translateLabel , gbc );
     }
 }

@@ -26,15 +26,16 @@ public class MainView extends JFrame{
         super("Minecraft Dictionary");
         this.setFont();
         this.controller = new WordController();
-        this.deletePanel = new DeletePanel(controller);
-        this.findPanel = new FindPanel(controller);
-        this.updatePanel = new UpdatePanel(controller);
+        this.deletePanel = new DeletePanel(controller, customFont);
+        this.findPanel = new FindPanel(controller, customFont);
+        this.updatePanel = new UpdatePanel(controller, customFont);
         this.add = new AddPanel(controller, customFont);
-        this.listPanel = new ListPanel(controller);
+        this.listPanel = new ListPanel(controller, customFont);
     }
 
     public void initialize(){
-        this.setSize( 850, 600);
+        this.setSize( 950, 700);
+        this.setResizable(false);
         this.setLayout(new BorderLayout(10,100));
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

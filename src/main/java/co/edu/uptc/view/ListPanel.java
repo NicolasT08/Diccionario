@@ -13,9 +13,11 @@ public class ListPanel extends JPanel implements ActionListener {
     private JLabel result;
     private WordController controller;
     private Image background;
+    private Font customFont;
 
-    public ListPanel(WordController controller) {
+    public ListPanel(WordController controller, Font customFont) {
         this.controller = controller;
+        this.customFont = customFont;
         this.setUp();
 
     }
@@ -33,6 +35,7 @@ public class ListPanel extends JPanel implements ActionListener {
         this.setUpRight();
         scroll.setOpaque(false);
         scroll.getViewport().setOpaque(false);
+        scroll.setBorder( BorderFactory.createEmptyBorder(25,25,25,25));
         this.left.setOpaque(false);
         this.add( this.left);
         this.add( scroll );
@@ -76,6 +79,9 @@ public class ListPanel extends JPanel implements ActionListener {
         JButton atoZ = new JButton("A - Z");
         atoZ.addActionListener( this );
         atoZ.setActionCommand( "all" );
+        atoZ.setBackground(new Color(110, 110, 110));
+        atoZ.setForeground(Color.WHITE);
+        atoZ.setFont( customFont );
 
 
         gbc.insets = new Insets( 10, 5,5, 5);
@@ -104,10 +110,12 @@ public class ListPanel extends JPanel implements ActionListener {
                 characterAlpha.setPreferredSize( new Dimension( 50,50));
                 characterAlpha.addActionListener(this );
                 characterAlpha.setActionCommand( String.valueOf(alpha));
-
+                characterAlpha.setBackground(new Color(110, 110, 110));
+                characterAlpha.setForeground(Color.WHITE);
+                characterAlpha.setFont( customFont );
                 gbc.gridx = j;
                 gbc.gridy = i;
-                gbc.weightx = 1;
+
                 gbc.fill = GridBagConstraints.BOTH;
                 alphabet.add( characterAlpha, gbc);
                 asciiValue++;
@@ -125,21 +133,23 @@ public class ListPanel extends JPanel implements ActionListener {
         this.setUpRight();
         for ( int i = 0; i < words.length ; i++ ){
 
-            JPanel s = new WordPanel( words[i][0], words[i][1], words[i][2]);
+            JPanel s = new WordPanel( words[i][0], words[i][1], words[i][2], customFont);
 
 
             int insertAt = Math.max(0, this.right.getComponentCount() - 1);
             GridBagConstraints gbc = new GridBagConstraints();
-            gbc.insets = new Insets(3, 2, 3,2);
+            gbc.insets = new Insets(15, 50, 30,30);
             gbc.gridwidth = GridBagConstraints.REMAINDER;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.weightx = 1;
+            gbc.weightx = 0.5;
+            gbc.fill = GridBagConstraints.BOTH;
+            s.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
             this.right.add( s , gbc, insertAt);
         }
     }
 
     private void noAnswers( String query){
         this.result.setText("No se encontraron palabras " + ( query.compareTo("all") == 0 ? ". Intenta añadir algunas.":" con " + query + "." ));
+        this.result.setFont( customFont );
         this.right.add( result );
     }
 

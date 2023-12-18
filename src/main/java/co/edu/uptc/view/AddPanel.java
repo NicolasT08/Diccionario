@@ -103,8 +103,11 @@ public class AddPanel extends JPanel implements ActionListener {
         this.addButton.addActionListener(this);
         this.addButton.setPreferredSize(new Dimension( 200, 30));
 
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1;
+        this.addButton.setBackground(new Color(110, 110, 110));
+        this.addButton.setForeground(Color.WHITE);
+
+
+
         JLabel wordLabel = new JLabel("Palabra");
         wordLabel.setFont( customFont );
         gbc.gridx = 0;

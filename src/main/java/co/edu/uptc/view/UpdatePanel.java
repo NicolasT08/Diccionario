@@ -24,9 +24,11 @@ public class UpdatePanel extends JPanel implements ActionListener {
     private JButton meaningButton;
     private JButton translationButton;
     private Image background;
+    private  Font customFont;
 
-    UpdatePanel(WordController controller){
+    UpdatePanel(WordController controller, Font customFont){
         this.controller = controller;
+        this.customFont = customFont;
         this.setFindPanel();
     }
 
@@ -66,42 +68,61 @@ public class UpdatePanel extends JPanel implements ActionListener {
         this.leftPanel.setOpaque(false);
 
         JLabel labelWord = new JLabel("   Palabra: ");
-
+        labelWord.setFont( customFont );
         this.textWord = new JTextField();
         this.textWord.setPreferredSize( new Dimension(280, 30) );
+        this.textWord.setFont( customFont );
 
         JLabel labelAttribute = new JLabel("  Atributo a cambiar:");
+        labelAttribute.setFont( customFont );
 
+        Font buttonFont = new Font( customFont.getFontName(), customFont.getStyle(), 18);
         this.word = new JButton("Palabra");
         this.word.addActionListener(e -> election = 1);
-        this.word.addActionListener(e -> word.setBackground( new Color(143, 219, 143) ) );
+        this.word.addActionListener(e -> {
+            word.setBackground( new Color(143, 219, 143) );
+            word.setForeground( Color.BLACK);
+        } );
         this.word.addActionListener(e -> resetButtons() );
         this.word.setBackground(new Color(110, 110, 110));
         this.word.setForeground(Color.WHITE);
+        this.word.setFont( buttonFont );
+
 
         this.meaningButton = new JButton("Significado");
         this.meaningButton.addActionListener(e -> election = 2);
-        this.meaningButton.addActionListener(e -> meaningButton.setBackground( new Color(143, 219, 143) ) );
+        this.meaningButton.addActionListener(e -> {
+            meaningButton.setBackground( new Color(143, 219, 143) );
+            meaningButton.setForeground( Color.BLACK);
+        } );
         this.meaningButton.addActionListener(e -> resetButtons() );
         this.meaningButton.setBackground(new Color(110, 110, 110));
         this.meaningButton.setForeground(Color.WHITE);
+        this.meaningButton.setFont( buttonFont );
 
         this.translationButton = new JButton("Traduccion");
         this.translationButton.addActionListener(e -> election = 3);
-        this.translationButton.addActionListener(e -> translationButton.setBackground( new Color(143, 219, 143) ) );
+        this.translationButton.addActionListener(e -> {
+            translationButton.setBackground( new Color(143, 219, 143) );
+            translationButton.setForeground(Color.BLACK);
+        });
         this.translationButton.addActionListener(e -> resetButtons() );
         this.translationButton.setBackground(new Color(110, 110, 110));
         this.translationButton.setForeground(Color.WHITE);
+        this.translationButton.setFont( buttonFont );
 
         JLabel labelNewAttribute = new JLabel("   Nuevo valor: ");
+        labelNewAttribute.setFont( customFont );
 
         this.textNewValue = new JTextField();
         this.textNewValue.setPreferredSize( new Dimension(280, 30) );
+        this.textNewValue.setFont( customFont );
 
         this.sendButton = new JButton("Actualizar");
         this.sendButton.addActionListener(this);
         this.sendButton.setBackground(new Color(110, 110, 110));
         this.sendButton.setForeground(Color.WHITE);
+        this.sendButton.setFont( customFont );
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 3, 5);
@@ -163,7 +184,7 @@ public class UpdatePanel extends JPanel implements ActionListener {
         this.rightPanel.setOpaque(false);
 
         this.name = new JTextArea();
-
+        this.name.setFont( customFont );
         this.name.setMinimumSize(new Dimension(330, 20));
         this.name.setEditable(false);
         this.name.setOpaque(false);
@@ -173,7 +194,7 @@ public class UpdatePanel extends JPanel implements ActionListener {
 
 
         this.meaning = new JTextArea();
-
+        this.meaning.setFont( customFont );
         this.meaning.setMinimumSize(new Dimension(330, 70));
         this.meaning.setEditable(false);
         this.meaning.setOpaque(false);
@@ -183,7 +204,7 @@ public class UpdatePanel extends JPanel implements ActionListener {
 
 
         this.translation = new JTextArea();
-
+        this.translation.setFont( customFont );
         this.translation.setMinimumSize(new Dimension(330, 70));
         this.translation.setEditable(false);
         this.translation.setOpaque(false);
@@ -210,9 +231,14 @@ public class UpdatePanel extends JPanel implements ActionListener {
 
     }
     private void resetButtons() {
-        word.setBackground(null);
-        meaningButton.setBackground(null);
-        translationButton.setBackground(null);
+        this.word.setBackground(new Color(110, 110, 110));
+        this.word.setForeground(Color.WHITE);
+
+        this.meaningButton.setBackground(new Color(110, 110, 110));
+        this.meaningButton.setForeground(Color.WHITE);
+
+        this.translationButton.setBackground(new Color(110, 110, 110));
+        this.translationButton.setForeground(Color.WHITE);
     }
 
     private void resetValues(){

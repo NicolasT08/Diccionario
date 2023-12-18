@@ -19,9 +19,11 @@ public class DeletePanel extends JPanel implements ActionListener{
     private JLabel rightLabel;
     private boolean successfully;
     private Image background;
+    private Font customfont;
 
-    DeletePanel(WordController controller){
+    DeletePanel(WordController controller, Font customfont){
         this.controller = controller;
+        this.customfont = customfont;
         successfully = false;
         setDeleteTable();
     }
@@ -34,6 +36,7 @@ public class DeletePanel extends JPanel implements ActionListener{
 
         rightPanel = new JPanel(new GridBagLayout());
         rightLabel = new JLabel();
+        rightLabel.setFont( customfont );
         rightPanel.add(rightLabel);
         rightPanel.setOpaque(false);
 
@@ -65,14 +68,16 @@ public class DeletePanel extends JPanel implements ActionListener{
         leftPanel.setOpaque(false);
 
         JLabel labelWord = new JLabel("Palabra: ");
-
+        labelWord.setFont( customfont );
         this.textWord = new JTextField();
         this.textWord.setPreferredSize( new Dimension(190, 30) );
+        this.textWord.setFont( customfont );
 
         this.sendButton = new JButton("Eliminar");
         this.sendButton.addActionListener( this );
         this.sendButton.setBackground(new Color(110, 110, 110));
         this.sendButton.setForeground(Color.WHITE);
+        this.sendButton.setFont( customfont );
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -101,6 +106,8 @@ public class DeletePanel extends JPanel implements ActionListener{
                 this.textWord.setText("");
             } else {
                 if ( !textWord.getText().isEmpty() ){
+                    UIManager.put("OptionPane.messageFont", customfont);
+                    UIManager.put("OptionPane.buttonFont", customfont);
                     int result = JOptionPane.showConfirmDialog(null,"¿Seguro que quieres eliminar la palabra?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
                     if ( result == JOptionPane.YES_OPTION && !textWord.getText().isEmpty() ) {
@@ -119,7 +126,7 @@ public class DeletePanel extends JPanel implements ActionListener{
             public void run() {
                 rightLabel.setText("");
             }
-        },4500);
+        },2500);
     }
 
     private void updateRightLabel() {

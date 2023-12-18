@@ -18,9 +18,11 @@ public class FindPanel extends JPanel implements ActionListener {
     private JTextArea meaning;
     private JTextArea translation;
     private Image background;
+    private Font customFont;
 
-    FindPanel(WordController controller){
+    FindPanel(WordController controller, Font customFont){
         this.controller = controller;
+        this.customFont = customFont;
         setFindPanel();
     }
 
@@ -61,14 +63,16 @@ public class FindPanel extends JPanel implements ActionListener {
         leftPanel.setOpaque(false);
 
         JLabel labelWord = new JLabel("Palabra: ");
-
+        labelWord.setFont( customFont );
         this.textWord = new JTextField();
         this.textWord.setPreferredSize( new Dimension(190, 30) );
+        this.textWord.setFont( customFont );
 
         this.sendButton = new JButton("Buscar");
         this.sendButton.addActionListener( this );
         this.sendButton.setBackground(new Color(110, 110, 110));
         this.sendButton.setForeground(Color.WHITE);
+        this.sendButton.setFont( customFont );
 
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -102,6 +106,7 @@ public class FindPanel extends JPanel implements ActionListener {
         this.name.setLineWrap(true);
         this.name.setWrapStyleWord(true);
         this.name.setBackground(new Color(0, 0, 0, 0));
+        this.name.setFont( customFont );
 
         this.meaning = new JTextArea();
 
@@ -111,7 +116,7 @@ public class FindPanel extends JPanel implements ActionListener {
         this.meaning.setLineWrap(true);
         this.meaning.setWrapStyleWord(true);
         this.meaning.setBackground(new Color(0, 0, 0, 0));
-
+        this.meaning.setFont( customFont );
 
         this.translation = new JTextArea();
 
@@ -121,6 +126,7 @@ public class FindPanel extends JPanel implements ActionListener {
         this.translation.setLineWrap(true);
         this.translation.setWrapStyleWord(true);
         this.translation.setBackground(new Color(0, 0, 0, 0));
+        this.translation.setFont( customFont );
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
