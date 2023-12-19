@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * Frame that contains the panels to
@@ -45,9 +46,8 @@ public class MainView extends JFrame{
      */
     public void initialize(){
 
-        ImageIcon icon = new ImageIcon("./src/main/resources/imgs/IconBook.png");
+        this.setIcon();
 
-        this.setIconImage(icon.getImage());
         this.setSize( 950, 700);
         this.setResizable(false);
         this.setLayout(new BorderLayout(10,100));
@@ -59,6 +59,17 @@ public class MainView extends JFrame{
         this.add(this.tabs, BorderLayout.CENTER);
 
         this.setVisible(true);
+    }
+
+    /**
+     * Set the Frame icon
+     */
+    private void setIcon() {
+        URL imageUrl = MainView.class.getClassLoader().getResource("imgs/IconBook.png");
+        if ( imageUrl != null ){
+            ImageIcon icon = new ImageIcon(imageUrl);
+            this.setIconImage(icon.getImage());
+        }
     }
 
     /**
@@ -92,7 +103,11 @@ public class MainView extends JFrame{
      */
     public void setFont(){
         try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/main/resources/fonts/pixels.ttf")).deriveFont(20f);
+            URL fontUrl = MainView.class.getClassLoader().getResource("fonts/pixels.ttf");
+            if ( fontUrl == null ) throw new IOException();
+
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontUrl.openStream());
+            customFont = customFont.deriveFont(20f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
             this.customFont = customFont;

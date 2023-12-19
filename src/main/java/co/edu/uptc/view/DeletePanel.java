@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,7 +45,7 @@ public class DeletePanel extends JPanel implements ActionListener{
 
     private void setDeleteTable(){
         this.setLayout(new GridLayout(1,2));
-        this.setBackground("./src/main/resources/imgs/Libro abierto.png");
+        this.setBackground("imgs/Libro abierto.png");
 
         this.setLeftPanel();
 
@@ -88,9 +89,10 @@ public class DeletePanel extends JPanel implements ActionListener{
      */
 
     public void setBackground(String imagePath) {
-
+        URL path = MainView.class.getClassLoader().getResource(imagePath);
+        if ( path == null ) return;
         this.setOpaque(false);
-        this.background = new ImageIcon(imagePath).getImage();
+        this.background = new ImageIcon(path).getImage();
         repaint();
     }
 

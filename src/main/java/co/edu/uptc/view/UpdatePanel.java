@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 /**
  * This class creates a JPanel to update a word in the dictionary.
@@ -51,7 +52,7 @@ public class UpdatePanel extends JPanel implements ActionListener {
 
     private void setFindPanel(){
         this.setLayout(new GridLayout(1,2));
-        this.setBackground("./src/main/resources/imgs/Libro abierto.png");
+        this.setBackground("imgs/Libro abierto.png");
 
         this.setLeftPanel();
 
@@ -91,9 +92,10 @@ public class UpdatePanel extends JPanel implements ActionListener {
      */
 
     public void setBackground(String imagePath) {
-
+        URL path = MainView.class.getClassLoader().getResource(imagePath);
+        if ( path == null ) return;
         this.setOpaque(false);
-        this.background = new ImageIcon(imagePath).getImage();
+        this.background = new ImageIcon(path).getImage();
         repaint();
     }
 
