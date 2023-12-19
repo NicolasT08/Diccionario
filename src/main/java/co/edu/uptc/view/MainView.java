@@ -44,6 +44,10 @@ public class MainView extends JFrame{
      * Set the parameters of the Frame, and add the JTabbed Pane
      */
     public void initialize(){
+
+        ImageIcon icon = new ImageIcon("./imgs/IconBook.png");
+
+        this.setIconImage(icon.getImage());
         this.setSize( 950, 700);
         this.setResizable(false);
         this.setLayout(new BorderLayout(10,100));
