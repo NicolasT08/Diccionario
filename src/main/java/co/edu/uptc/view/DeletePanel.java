@@ -155,6 +155,7 @@ public class DeletePanel extends JPanel implements ActionListener{
             } else if ( controller.findWord( textWord.getText() )[0].equals("") ) {
                 String[] response = controller.findWord(textWord.getText());
                 this.rightLabel.setText( "<html>La palabra " + textWord.getText() + " debe contener <br>solamente caracteres alfabéticos!" );
+                this.textWord.setText("");
             }else {
                 if ( !textWord.getText().isEmpty() ){
                     UIManager.put("OptionPane.messageFont", customfont);

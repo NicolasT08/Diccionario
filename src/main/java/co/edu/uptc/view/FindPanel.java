@@ -243,6 +243,7 @@ public class FindPanel extends JPanel implements ActionListener {
                         meaning.setText("");
                     }
                 },2500);
+                this.textWord.setText("");
             }else {
                 String[] response = controller.findWord(textWord.getText());
                 this.name.setText( response[0] );
