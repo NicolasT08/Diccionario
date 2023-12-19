@@ -211,8 +211,13 @@ public class FindPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         java.util.Timer timer = new Timer();
         if( e.getSource() == sendButton){
+
+            this.meaning.setText("");
+            this.name.setText("");
+            this.translation.setText("");
 
             if( textWord.getText().isEmpty() ){
                 this.meaning.setText("Porfavor digita una palabra");
