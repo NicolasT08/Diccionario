@@ -44,7 +44,7 @@ public class AddPanel extends JPanel implements ActionListener {
      */
     public void setupPanel(){
         this.setLayout( new GridLayout(1,2) );
-        this.setBackground("./imgs/Libro abierto.png");
+        this.setBackground("./src/main/resources/imgs/Libro abierto.png");
         this.setPreferredSize( new Dimension(450,300));
         this.left = new JPanel();
         this.right = new JPanel();

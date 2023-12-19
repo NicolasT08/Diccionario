@@ -39,7 +39,7 @@ public class ListPanel extends JPanel implements ActionListener {
      * the components.
      */
     public void setUp(){
-        this.setBackground("./imgs/Libro abierto.png");
+        this.setBackground("./src/main/resources/imgs/Libro abierto.png");
         this.left = new JPanel();
         this.right = new JPanel();
         this.result = new JLabel();
@@ -51,6 +51,7 @@ public class ListPanel extends JPanel implements ActionListener {
         this.setUpRight();
         scroll.setOpaque(false);
         scroll.getViewport().setOpaque(false);
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBorder( BorderFactory.createEmptyBorder(25,25,25,25));
         this.left.setOpaque(false);
         this.add( this.left);

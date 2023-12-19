@@ -44,7 +44,7 @@ public class DeletePanel extends JPanel implements ActionListener{
 
     private void setDeleteTable(){
         this.setLayout(new GridLayout(1,2));
-        this.setBackground("./imgs/Libro abierto.png");
+        this.setBackground("./src/main/resources/imgs/Libro abierto.png");
 
         this.setLeftPanel();
 

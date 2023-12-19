@@ -91,7 +91,7 @@ public class WordController {
      * need of definition or translate.
      * @param word The word to find.
      * @return a String array that contains the word, meaning and translate of
-     * the word. If the word isn't in the array null will be returned.
+     * the word. If the word isn't in the array a message will be returned.
      */
     public String[] findWord(String word) {
 

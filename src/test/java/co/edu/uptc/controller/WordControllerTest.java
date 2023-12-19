@@ -193,7 +193,7 @@ public class WordControllerTest {
     void findWord(){
         setup();
 
-        assertNull( controller.findWord( "hu tao" ) );
+       assertEquals("La palabra \"hu tao\"  debe contener solamente caracteres alfabéticos!", controller.findWord( "hu tao" )[1] );
 
         assertNull(controller.findWord("Paranguaricutirimicuaro"));
 

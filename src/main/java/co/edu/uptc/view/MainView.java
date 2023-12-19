@@ -45,7 +45,7 @@ public class MainView extends JFrame{
      */
     public void initialize(){
 
-        ImageIcon icon = new ImageIcon("./imgs/IconBook.png");
+        ImageIcon icon = new ImageIcon("./src/main/resources/imgs/IconBook.png");
 
         this.setIconImage(icon.getImage());
         this.setSize( 950, 700);
@@ -92,7 +92,7 @@ public class MainView extends JFrame{
      */
     public void setFont(){
         try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("./fonts/pixels.ttf")).deriveFont(20f);
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/main/resources/fonts/pixels.ttf")).deriveFont(20f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
             this.customFont = customFont;
