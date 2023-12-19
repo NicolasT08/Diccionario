@@ -3,8 +3,21 @@ package co.edu.uptc.view;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class represents a Word Object as a Panel
+ * Showing the word, the meaning and the translate.
+ * @author Nicolas Sarmiento
+ */
 public class WordPanel extends JPanel {
 
+    /**
+     * Create a new panel design for a word. To alocate the word itself,
+     * the meaning and the English translation.
+     * @param id String that contains the word.
+     * @param meaning The meaning of the word
+     * @param translate The English translation
+     * @param font The custom font
+     */
     public WordPanel(String id, String meaning, String translate, Font font) {
         this.setLayout( new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

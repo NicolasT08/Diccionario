@@ -14,7 +14,7 @@ import java.util.TimerTask;
  * interface components to enter the word to delete and a button
  * to start the deletion process. The class communicates with a
  * WordController in order to perform word deletion.
- * @Author Nicolas Tinjaca
+ * @author Nicolas Tinjaca
  */
 
 public class DeletePanel extends JPanel implements ActionListener{

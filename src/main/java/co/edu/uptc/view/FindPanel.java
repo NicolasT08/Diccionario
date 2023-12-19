@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * and a button to start the search process in all the words of the
  * dictionary. The class communicates with a WordController in order
  * to perform word search.
- * @Author Nicolas Tinjaca
+ * @author Nicolas Tinjaca
  */
 
 public class FindPanel extends JPanel implements ActionListener {

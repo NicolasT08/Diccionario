@@ -3,13 +3,16 @@ package co.edu.uptc.view;
 import co.edu.uptc.controller.WordController;
 
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import java.awt.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+
+/**
+ * Frame that contains the panels to
+ * perform the Dictionary options.
+ * @author Nicolas Tinjaca
+ * @author Nicolas Sarmiento
+ */
 
 public class MainView extends JFrame{
 
@@ -22,6 +25,10 @@ public class MainView extends JFrame{
     private FindPanel findPanel;
     private Font customFont;
 
+    /**
+     * Creates an instance of the components like the
+     * functions panels and the Tabbed Pane.
+     */
     public MainView(){
         super("Minecraft Dictionary");
         this.setFont();
@@ -33,6 +40,9 @@ public class MainView extends JFrame{
         this.listPanel = new ListPanel(controller, customFont);
     }
 
+    /**
+     * Set the parameters of the Frame, and add the JTabbed Pane
+     */
     public void initialize(){
         this.setSize( 950, 700);
         this.setResizable(false);
@@ -47,6 +57,10 @@ public class MainView extends JFrame{
         this.setVisible(true);
     }
 
+    /**
+     * Add the function panels to the Jtabbed Pane and
+     * setting the JTabbed Pane.
+     */
     public void setTabs(){
         UIManager.put("TabbedPane.selected", new Color(53, 215, 46));
         this.tabs = new JTabbedPane();
@@ -69,6 +83,9 @@ public class MainView extends JFrame{
 
     }
 
+    /**
+     * Load the custom font
+     */
     public void setFont(){
         try {
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("./fonts/pixels.ttf")).deriveFont(20f);

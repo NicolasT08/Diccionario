@@ -11,8 +11,8 @@ import co.edu.uptc.model.Word;
  * the words. It has a static array to manage the spanish alphabet.
  * The main actions on this class are: Create, update, read and delete
  * words, also, it verifies the information before do some action.
- * @Author Nicolas Tinjaca
- * @Author Nicolas Sarmiento
+ * @author Nicolas Tinjaca
+ * @author Nicolas Sarmiento
  */
 public class WordController {
     private BinaryTree<Word>[] dictionary;

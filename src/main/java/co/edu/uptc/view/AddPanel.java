@@ -13,6 +13,11 @@ import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This panel is for add words to
+ * the dictionary
+ * @author Nicolas Sarmiento
+ */
 public class AddPanel extends JPanel implements ActionListener {
     private WordController controller;
     private JPanel left;
@@ -32,6 +37,11 @@ public class AddPanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * This method sets the components of the
+     * whole panel. The panel contains two sub-panels.
+     * Also in this method instances all components.
+     */
     public void setupPanel(){
         this.setLayout( new GridLayout(1,2) );
         this.setBackground("./imgs/Libro abierto.png");
@@ -55,6 +65,15 @@ public class AddPanel extends JPanel implements ActionListener {
         this.add(this.right );
     }
 
+    /**
+     * Overrides the paintComponent method to place a custom
+     * panel background image, gets the width and height of the
+     * panel, uses the Graphics object to draw the image. The method
+     * then calls the superclass's paintComponent to ensure proper rendering.
+     *
+     * @param g Graphics object used for painting.
+     */
+
     public void paintComponent(Graphics g) {
 
         int width = this.getSize().width;
@@ -67,12 +86,26 @@ public class AddPanel extends JPanel implements ActionListener {
         super.paintComponent(g);
     }
 
+    /**
+     * Sets the background image of the panel using the provided file path.
+     * It makes the panel transparent and assigns the specified image to the
+     * background variable. The repaint method is called to update the display.
+     *
+     * @param imagePath File path of the background image.
+     */
     public void setBackground(String imagePath) {
 
         this.setOpaque(false);
         this.background = new ImageIcon(imagePath).getImage();
         repaint();
     }
+
+
+    /**
+     * This method sets up the right panel. It contains only a label
+     * that show information about the add operation. The label is located
+     * in the middle of the panel.
+     */
     private void setupRight() {
 
         this.right.setLayout( new BorderLayout());
@@ -85,6 +118,14 @@ public class AddPanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * This method sets up the left panel. This panel contains:
+     * label and a text field for the word.
+     * label and a text area for the meaning.
+     * label and text field for word translation.
+     * Finally, a button to perform the add action.
+     * This panel has a GridBag layout
+     */
     private void setupLeft() {
 
         GridBagLayout layout = new GridBagLayout();
@@ -156,11 +197,17 @@ public class AddPanel extends JPanel implements ActionListener {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
         this.left.add( this.addButton, gbc );
-
-
     }
 
 
+    /**
+     * This method override the action to perform when
+     * the button is pressed. The action is add the
+     * word to the dictionary, first the fields are
+     * checked and then the label in the right panel is
+     * set to the answer than came from the controller.
+     * @param e event from the send button.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if ( e.getSource() == this.addButton ){

@@ -1,5 +1,11 @@
 package co.edu.uptc.model;
 
+/**
+ * Contains an Object and the reference to
+ * a left and right node
+ * @author Nicolas Tinjaca
+ * @param <T> Object Type
+ */
 public class TreeNode <T>{
     private T info;
     private TreeNode<T> left;

@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
  * class communicates with a WordController in order to perform word
  * update.
  *
- * @Author Nicolas Tinjaca
+ * @author Nicolas Tinjaca
  */
 
 public class UpdatePanel extends JPanel implements ActionListener {

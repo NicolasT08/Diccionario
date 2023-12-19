@@ -1,5 +1,10 @@
 package co.edu.uptc.model;
 
+/**
+ * Contains a word, the id is the word itself,
+ * the meaning and the English translation
+ * @author Nicolas Sarmiento
+ */
 public class Word {
     private String id;
     private String meaning;

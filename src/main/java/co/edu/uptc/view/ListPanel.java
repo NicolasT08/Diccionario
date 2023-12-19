@@ -7,6 +7,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This panel collect and perform the word list action.
+ * For this task, the Panel has some components mainly buttons
+ * and a scrollbar to show the respective answer.
+ * @author Nicolas Sarmiento
+ */
 public class ListPanel extends JPanel implements ActionListener {
     private JPanel left;
     private JPanel right;
@@ -15,6 +21,12 @@ public class ListPanel extends JPanel implements ActionListener {
     private Image background;
     private Font customFont;
 
+    /**
+     * This creates the panel and set the
+     * controller and the font.
+     * @param controller WordController to do the actions.
+     * @param customFont Custom font
+     */
     public ListPanel(WordController controller, Font customFont) {
         this.controller = controller;
         this.customFont = customFont;
@@ -22,6 +34,10 @@ public class ListPanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * This method sets up the background and instanciates
+     * the components.
+     */
     public void setUp(){
         this.setBackground("./imgs/Libro abierto.png");
         this.left = new JPanel();
@@ -41,6 +57,16 @@ public class ListPanel extends JPanel implements ActionListener {
         this.add( scroll );
     }
 
+
+    /**
+     * Overrides the paintComponent method to place a custom
+     * panel background image, gets the width and height of the
+     * panel, uses the Graphics object to draw the image. The method
+     * then calls the superclass's paintComponent to ensure proper rendering.
+     *
+     * @param g Graphics object used for painting.
+     */
+
     public void paintComponent(Graphics g) {
 
         int width = this.getSize().width;
@@ -53,6 +79,13 @@ public class ListPanel extends JPanel implements ActionListener {
         super.paintComponent(g);
     }
 
+    /**
+     * Sets the background image of the panel using the provided file path.
+     * It makes the panel transparent and assigns the specified image to the
+     * background variable. The repaint method is called to update the display.
+     *
+     * @param imagePath File path of the background image.
+     */
     public void setBackground(String imagePath) {
 
         this.setOpaque(false);
@@ -60,6 +93,13 @@ public class ListPanel extends JPanel implements ActionListener {
         repaint();
     }
 
+
+    /**
+     * Sets the components of the right panel. By default,
+     * it has only a label that shows a wrong answer for the
+     * performed action. And this panel contains a scroll panel
+     * with WordPanels that represents the answer of the query
+     */
     private void setUpRight() {
        this.right.setOpaque(false);
        this.right.setLayout( new GridBagLayout());
@@ -73,6 +113,12 @@ public class ListPanel extends JPanel implements ActionListener {
     }
 
 
+    /**
+     * Sets up the components of the left panel.
+     * The components are buttons. There are a button for all the words.
+     * Also, the left panel has all the Spanish alphabet characters, to
+     * perform a query for each spanish alphabet character.
+     */
     private void setupLeft() {
         GridBagConstraints gbc = new GridBagConstraints();
         this.left.setLayout( new GridBagLayout());
@@ -123,6 +169,12 @@ public class ListPanel extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Add WordPanels to the right panel when a query has
+     * words to show. The panels are added in a GridBag layout
+     * and stack one over one.
+     * @param value is the query character.
+     */
     private void showAnswers( String value){
        this.right.removeAll();
         String[][] words = value.compareTo("all") == 0 ? this.controller.showAllWords() : this.controller.listByFirstChar(value.charAt(0));
@@ -147,12 +199,25 @@ public class ListPanel extends JPanel implements ActionListener {
         }
     }
 
-    private void noAnswers( String query){
+    /**
+     * This method is for set the right panel label when
+     * the query has no answer. So it sets a message
+     *
+     * @param query type of query
+     */
+    private void noAnswers( String query ){
         this.result.setText("No se encontraron palabras " + ( query.compareTo("all") == 0 ? ". Intenta añadir algunas.":" con " + query + "." ));
         this.result.setFont( customFont );
         this.right.add( result );
     }
 
+    /**
+     * This is the action than performs when some button in
+     * the left panel is clicked. The function to set
+     * the right panel is called as well the method to repaint
+     * the right panel
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         showAnswers( e.getActionCommand());

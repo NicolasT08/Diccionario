@@ -1,5 +1,12 @@
 package co.edu.uptc.model;
 
+/**
+ * This Object contains info
+ * and a reference to a next object in
+ * a list
+ * @author Nicolas Sarmiento
+ * @param <T> Object Type
+ */
 public class ListNode <T> {
     private ListNode<T> next;
     private T info;

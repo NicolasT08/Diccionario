@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class WordControllerTest {
     private WordController controller;
     @BeforeEach
