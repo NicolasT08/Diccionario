@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * This class creates a JPanel to find a word in the dictionary.
@@ -207,18 +209,41 @@ public class FindPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        java.util.Timer timer = new Timer();
         if( e.getSource() == sendButton){
 
             if( textWord.getText().isEmpty() ){
                 this.meaning.setText("Porfavor digita una palabra");
                 this.name.setText("");
                 this.translation.setText("");
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        meaning.setText("");
+                    }
+                },2500);
             } else if ( controller.findWord(textWord.getText()) == null ){
                 this.meaning.setText("No se encontro la palabra " + textWord.getText());
                 this.name.setText("");
                 this.translation.setText("");
                 this.textWord.setText("");
-            } else {
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        meaning.setText("");
+                    }
+                },2500);
+
+            } else if( controller.findWord(textWord.getText())[0].equals("") ) {
+                String[] response = controller.findWord(textWord.getText());
+                this.meaning.setText( response[1] );
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        meaning.setText("");
+                    }
+                },2500);
+            }else {
                 String[] response = controller.findWord(textWord.getText());
                 this.name.setText( response[0] );
                 this.meaning.setText("Definición: " + response[1] );

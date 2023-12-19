@@ -99,8 +99,10 @@ public class WordController {
 
         try {
             this.validateWord.validateWord( word );
-        } catch ( InvalidWord e ){
-            return null;
+        } catch ( IllegalArgumentException e ){
+            String[] response = new String[3];
+            response[0] = ""; response[1] = e.getMessage(); response[2] = "";
+            return response;
         }
 
         int pos = this.findIndex( word );
@@ -261,6 +263,15 @@ public class WordController {
      * the word or null if the word doesn't exist.
      */
     public String[] deleteWord(String word){
+
+        try {
+            this.validateWord.validateWord( word );
+        } catch ( IllegalArgumentException e ){
+            String[] response = new String[3];
+            response[0] = ""; response[1] = e.getMessage(); response[2] = "";
+            return response;
+        }
+
         int index = this.findIndex( word );
         String[] response = this.findWord( word );
 
