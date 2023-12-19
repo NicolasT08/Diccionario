@@ -17,7 +17,7 @@ import java.io.IOException;
 public class MainView extends JFrame{
 
     private JTabbedPane tabs;
-    private AddPanel add;
+    private AddPanel addPanel;
     private WordController controller;
     private DeletePanel deletePanel;
     private UpdatePanel updatePanel;
@@ -36,7 +36,7 @@ public class MainView extends JFrame{
         this.deletePanel = new DeletePanel(controller, customFont);
         this.findPanel = new FindPanel(controller, customFont);
         this.updatePanel = new UpdatePanel(controller, customFont);
-        this.add = new AddPanel(controller, customFont);
+        this.addPanel = new AddPanel(controller, customFont);
         this.listPanel = new ListPanel(controller, customFont);
     }
 
@@ -68,7 +68,7 @@ public class MainView extends JFrame{
         this.tabs.setBorder( BorderFactory.createEmptyBorder(25,5,25,50));
         this.tabs.setFont( customFont );
 
-        this.tabs.addTab("Añadir", this.add);
+        this.tabs.addTab("Añadir", this.addPanel);
         this.tabs.addTab("Buscar",this.findPanel);
         this.tabs.addTab("Actualizar",this.updatePanel);
         this.tabs.addTab("Listar",  this.listPanel);
