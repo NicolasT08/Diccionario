@@ -206,7 +206,8 @@ public class ListPanel extends JPanel implements ActionListener {
      * @param query type of query
      */
     private void noAnswers( String query ){
-        this.result.setText("No se encontraron palabras " + ( query.compareTo("all") == 0 ? ". Intenta añadir algunas.":" con " + query + "." ));
+        this.result.setText("<html>No se encontraron palabras" + ( query.compareTo("all") == 0 ? ".<br>Intenta añadir algunas.":" con " + query + ".") + "</html>");
+
         this.result.setFont( customFont );
         this.right.add( result );
     }
